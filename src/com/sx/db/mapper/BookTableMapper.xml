@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sx.db.mapper.BookTableMapper">
+	
+	<select id="getBookList" resultType="com.sx.entity.Book">
+		select * from booktable
+	</select>
+	
+	<select id="getBookByISBN" resultType="com.sx.entity.Book">
+		select * from booktable where ISBN = ISBN
+	</select>
+
+	<select id="getBookByAuthor" resultType="com.sx.entity.Book">
+		select * from booktable where Author = Author
+	</select>
+	
+	<select id="getBookByBookName" resultType="com.sx.entity.Book">
+		select * from booktable BookName = BookName
+	</select>
+	
+	<insert id="insertBook" parameterType="com.sx.entity.Book">
+		insert into booktable
+		(
+		BookName, Author, Press, PressDate, Price, Count,
+		TotalPrice, ISBN, BookCategory, Language, Size, Binding, Feature
+		)
+		values 
+		(
+		#{bookName}, #{author}, #{press}, #{pressDate}, #{price}, #{count},
+		#{totalPrice}, #{ISBN}, #{bookCategory}, #{language}, #{size}, #{binding},
+		#{feature}
+		)
+	</insert>
+</mapper>

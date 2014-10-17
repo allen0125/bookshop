@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+	<appender name="CONSOLE" class="org.apache.log4j.RollingFileAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<Pattern>%-4r [%thread] %-5level C:%X{client} N:%X{number} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE"
+		class="org.apache.log4j.RollingFileAppender">
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/var/log/cloud/CloudStorage/%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root>
+		<level value="debug" />
+		<appender-ref ref="FILE" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>
