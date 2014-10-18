@@ -17,6 +17,7 @@ import com.sx.util.FileUtil;
 import com.sx.fun.ExcelOp;
 
 public class MainFrame extends JFrame {
+	BookManage bookManage = new BookManage(1000);
 
 	/**
 	 * Launch the application.
@@ -71,8 +72,8 @@ public class MainFrame extends JFrame {
 		JButton btnBookManage = new JButton("\u4E66\u7C4D\u7BA1\u7406");
 		btnBookManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Dimension frameDim = getSize(); // 为了获取frame的宽度
-				setContentPane(new BookManage(frameDim.width));
+//				Dimension frameDim = getSize(); // 为了获取frame的宽度
+				setContentPane(bookManage);
 				validate();
 			}
 		});

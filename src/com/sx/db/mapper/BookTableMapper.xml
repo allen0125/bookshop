@@ -3,21 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sx.db.mapper.BookTableMapper">
-	
 	<select id="getBookList" resultType="com.sx.entity.Book">
 		select * from booktable
 	</select>
 	
 	<select id="getBookByISBN" resultType="com.sx.entity.Book">
-		select * from booktable where ISBN = ISBN
+		select * from booktable where ISBN = #{ISBN}
 	</select>
 
 	<select id="getBookByAuthor" resultType="com.sx.entity.Book">
-		select * from booktable where Author = Author
+		select * from booktable where Author = #{Author}
 	</select>
 	
 	<select id="getBookByBookName" resultType="com.sx.entity.Book">
-		select * from booktable BookName = BookName
+		select * from booktable BookName = #{BookName}
 	</select>
 	
 	<insert id="insertBook" parameterType="com.sx.entity.Book">

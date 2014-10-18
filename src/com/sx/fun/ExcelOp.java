@@ -40,12 +40,14 @@ public class ExcelOp {
 	 * 使用poi读取excel导入数据库
 	 */
 	public static void importExcel(File file) {
+		boolean flag = true; // 执行是否成功的标志位
 		// poi读取excel
 		// 创建要读入的文件的输入流
 		InputStream inp = null;
 		try {
 			inp = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
+			flag = false;
 			LOGGER.error(e.getMessage());
 			LOGGER.error(e.getStackTrace().toString());
 			String errorMsg = String.format("File %s not found!",
@@ -60,6 +62,7 @@ public class ExcelOp {
 		try {
 			wb = WorkbookFactory.create(inp);
 		} catch (InvalidFormatException | IOException e) {
+			flag = false;
 			LOGGER.error("Create workbook error!!!");
 			LOGGER.error(e.getMessage());
 			LOGGER.error(e.getStackTrace().toString());
@@ -70,6 +73,7 @@ public class ExcelOp {
 		try {
 			BookOp.insertBooks(bookList);
 		} catch (Exception e) {
+			flag = false;
 			JOptionPane.showMessageDialog(null, "导入数据库错误", "错误",
 					JOptionPane.ERROR_MESSAGE);
 			LOGGER.error("Insert into booktable error!!!");
@@ -87,8 +91,11 @@ public class ExcelOp {
 				LOGGER.error(e.getStackTrace().toString());
 			}
 		}
-		JOptionPane.showMessageDialog(null, "导入成功", "成功",
-				JOptionPane.INFORMATION_MESSAGE);
+
+		if (true == flag) {
+			JOptionPane.showMessageDialog(null, "导入成功", "成功",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	/*
@@ -235,6 +242,7 @@ public class ExcelOp {
 		Row row = sheet.createRow(0);
 		row.createCell(0).setCellValue("ID");
 		row.createCell(1).setCellValue(ExcelTitle.BOOKNAME);
+//		row.createCell(2).setCellValue();
 
 		return row;
 	}

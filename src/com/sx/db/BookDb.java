@@ -26,7 +26,20 @@ public class BookDb {
 		}
 		return list;
 	}
-	
+
+	public static void insertBookList(List<Book> bookList) throws Exception {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			for (Book book : bookList) {
+				mapper.insertBook(book);
+			}
+			session.commit();
+		} finally {
+			session.close();
+		}
+	}
+
 	public static List<Book> getBookByISBN(long ISBN) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		List<Book> list = null;
@@ -41,7 +54,7 @@ public class BookDb {
 		}
 		return list;
 	}
-	
+
 	public static List<Book> getBookByAuthor(String Author) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		List<Book> list = null;
@@ -56,8 +69,8 @@ public class BookDb {
 		}
 		return list;
 	}
-	
-	public static List<Book> getBookByBookName(String BookName){
+
+	public static List<Book> getBookByBookName(String BookName) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		List<Book> list = null;
 		try {
@@ -71,18 +84,4 @@ public class BookDb {
 		}
 		return list;
 	}
-	
-	public static void insertBookList(List<Book> bookList) throws Exception{
-		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
-		try {
-			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
-			for (Book book : bookList) {
-				mapper.insertBook(book);
-			}
-			session.commit();
-		} finally {
-			session.close();
-		}
-	}
-
 }
