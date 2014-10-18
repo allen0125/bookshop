@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.sx.entity.Book;
 import com.sx.fun.BookOp;
+import com.sx.view.Add;
 
 public class BookManage extends JPanel {
 	private JTextField textField;
@@ -30,9 +31,12 @@ public class BookManage extends JPanel {
 	private String selected;
 	List<Book> bookList;
 	JScrollPane scrollPane;
+	private JButton button;
+	private JButton button_1;
+	private JButton button_2;
 
 	/**
-	 * Create the panel.
+	 * Create the panel.   有BUG！！！！！！！！！！！！！！！！书名查询不可以用！
 	 */
 	public BookManage(int width) {
 		setLayout(null);
@@ -47,7 +51,7 @@ public class BookManage extends JPanel {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "ISBN",
-				"\u4E66\u540D", "\u4F5C\u8005" }));
+				"\u4E66\u540D", "\u4F5C\u8005" }));//书名 作者
 		panel.add(comboBox);
 
 		JLabel labelKeyWords = new JLabel("\u5173\u952E\u5B57");
@@ -57,7 +61,7 @@ public class BookManage extends JPanel {
 		panel.add(textField);
 		textField.setColumns(10);
 
-		JButton btnSearch = new JButton("\u67E5\u8BE2");
+		JButton btnSearch = new JButton("\u67E5\u8BE2");//查询
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().equals("")) {
@@ -78,9 +82,55 @@ public class BookManage extends JPanel {
 								JOptionPane.ERROR_MESSAGE);
 					}
 				}
+				
+				if (comboBox.getSelectedItem().toString().trim().equals("\u4E66\u540D")) {    //书名查询
+					String BookName = null;
+					try {
+						BookName = textField.getText();
+						bookList = BookOp.getBookByBookName(BookName);
+						scrollPane.setViewportView(refreshTable(bookList));
+						scrollPane.validate();
+					}  catch (NumberFormatException e3) {
+						JOptionPane.showMessageDialog(null, "非法输入！", "错误",
+								JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}
+				
+				if (comboBox.getSelectedItem().toString().trim().equals("\u4F5C\u8005")) {//作者查询
+					String Author = null;
+					try {
+						Author = textField.getText();
+						bookList = BookOp.getBookByAuthor(Author);
+						scrollPane.setViewportView(refreshTable(bookList));
+						scrollPane.validate();
+					} catch (NumberFormatException e2) {
+						JOptionPane.showMessageDialog(null, "非法输入！", "错误",
+									JOptionPane.ERROR_MESSAGE);
+						// TODO: handle exception
+					}
+					
+				}
+
 			}
 		});
 		panel.add(btnSearch);
+		
+		button = new JButton("\u6DFB\u52A0");//添加
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Add add = new Add();
+				add.setVisible(true);
+			}
+			
+		});
+		panel.add(button);
+		
+		button_1 = new JButton("\u4FEE\u6539");//修改
+		panel.add(button_1);
+		
+		button_2 = new JButton("\u5220\u9664");//删除
+		panel.add(button_2);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 33, 1000, 600);
