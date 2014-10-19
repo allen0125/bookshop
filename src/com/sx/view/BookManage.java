@@ -2,6 +2,8 @@ package com.sx.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Vector;
 
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -48,7 +51,32 @@ public class BookManage extends JPanel {
 		labelSearch = new JLabel("\u641C\u7D22\u5B57\u6BB5");
 		labelSearch.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(labelSearch);
-
+		
+//		表格选中监听
+//		tableShow.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		tableShow.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent e_m){
+//				int selectedRow = tableShow.getSelectedRow();
+//				 ID 书名", "作者", "出版社", "出版日期", "单价",
+//				"数量", "总价", "ISBN", "图书分类", "图书语言", "开本", "装帧", "特征"
+//				Object ID = defaultModel.getValueAt(selectedRow, 0);
+//				Object NM = defaultModel.getValueAt(selectedRow, 1);
+//				Object ZZ =defaultModel.getValueAt(selectedRow, 2);
+//				Object CBS =defaultModel.getValueAt(selectedRow, 3);
+//				Object CBRQ =defaultModel.getValueAt(selectedRow, 4);
+//				Object DJ =defaultModel.getValueAt(selectedRow, 5);
+//				Object SL =defaultModel.getValueAt(selectedRow, 6);
+//				Object ZJ =defaultModel.getValueAt(selectedRow, 7);
+//				Object ISBN =defaultModel.getValueAt(selectedRow, 8);
+//				Object TSFL =defaultModel.getValueAt(selectedRow, 9);
+//				Object YYKB =defaultModel.getValueAt(selectedRow, 10);
+//				Object ZhuangZ =defaultModel.getValueAt(selectedRow, 11);
+//				Object TZ =defaultModel.getValueAt(selectedRow, 12);
+				
+				
+				
+//			}
+//		});
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "ISBN",
 				"\u4E66\u540D", "\u4F5C\u8005" }));//书名 作者
@@ -130,6 +158,15 @@ public class BookManage extends JPanel {
 		panel.add(button_1);
 		
 		button_2 = new JButton("\u5220\u9664");//删除
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+	                int selectedRow = tableShow.getSelectedRow();//获得选中行的索引
+	                if(selectedRow!=-1)  //存在选中行
+	                {
+	                    defaultModel.removeRow(selectedRow);  //删除行      删除数据库未写
+	                }
+	            }
+		});
 		panel.add(button_2);
 
 		scrollPane = new JScrollPane();
@@ -139,6 +176,8 @@ public class BookManage extends JPanel {
 		bookList = BookOp.getBooks();
 		scrollPane.setViewportView(getShowTable(bookList));
 	}
+	
+	
 
 	private JTable refreshTable(List<Book> bookList) {
 		if (tableShow == null) {
