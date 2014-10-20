@@ -17,8 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import com.sx.entity.Book;
 import com.sx.fun.BookOp;
 
@@ -32,13 +30,11 @@ public class BookManage extends JPanel {
 	private String selected;
 	List<Book> bookList;
 	JScrollPane scrollPane;
-<<<<<<< HEAD
+
 	private JButton button;
 	private JButton button_1;
 	private JButton button_2;
 	private long del_isbn;
-=======
->>>>>>> origin/master
 
 	/**
 	 * Create the panel.
@@ -90,83 +86,75 @@ public class BookManage extends JPanel {
 			}
 		});
 		panel.add(btnSearch);
-<<<<<<< HEAD
-		
-		button = new JButton("\u6DFB\u52A0");//添加
+
+		button = new JButton("\u6DFB\u52A0");// 添加
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Add add = new Add();
+				AddBookFrame add = new AddBookFrame();
 				add.setVisible(true);
 			}
-			
+
 		});
 		panel.add(button);
-		
-		button_1 = new JButton("\u4FEE\u6539");//修改
+
+		button_1 = new JButton("\u4FEE\u6539");// 修改
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Add add_gai =new Add();
+				ModifyBookFrame add_gai = new ModifyBookFrame();
 				add_gai.setVisible(true);
-                int selectedRow = tableShow.getSelectedRow();//获得选中行的索引
-                if(selectedRow!=-1)  //存在选中行
-                {
-//   				 ID 书名", "作者", "出版社", "出版日期", "单价",
-//    				"数量", "总价", "ISBN", "图书分类", "图书语言", "开本", "装帧", "特征"
-    				Object ID = defaultModel.getValueAt(selectedRow, 0);
-    				Object NM = defaultModel.getValueAt(selectedRow, 1); 
-    				Object ZZ =defaultModel.getValueAt(selectedRow, 2);
-    				Object CBS =defaultModel.getValueAt(selectedRow, 3);    				
-    				Object CBRQ =defaultModel.getValueAt(selectedRow, 4);
-    				Object DJ =defaultModel.getValueAt(selectedRow, 5);
-    				Object SL =defaultModel.getValueAt(selectedRow, 6);
-    				Object ZJ =defaultModel.getValueAt(selectedRow, 7);
-    				Object ISBN =defaultModel.getValueAt(selectedRow, 8);
-    				Object TSFL =defaultModel.getValueAt(selectedRow, 9);
-    				Object YY =defaultModel.getValueAt(selectedRow, 10);
-    				Object KB =defaultModel.getValueAt(selectedRow,10);
-    				Object ZhuangZ =defaultModel.getValueAt(selectedRow, 12);
-    				Object TZ =defaultModel.getValueAt(selectedRow, 13);
-                
-                	
-                	
-                	add_gai.textField_BookName.setText((String) NM);
-                	add_gai.textField_BookISBN.setText((String) ISBN);
-                	add_gai.textField_BookNum.setText((String) SL);
-                	add_gai.textField_Author.setText((String) ZZ);
-                	add_gai.textField_fenlei.setText((String) TSFL);
-                	add_gai.textField_kaiben.setText((String) KB);
-                	add_gai.textField_lang.setText((String) YY);
-                	add_gai.textField_press.setText((String) CBS);
-                	add_gai.textField_tezhen.setText((String) TZ);
-                	add_gai.textField_total.setText((String) ZJ);
-                	add_gai.textField_zhuangzhen.setText((String) ZhuangZ);
-                	add_gai.textField_press_date.setText((String) CBRQ);
-                	add_gai.textField_Price.setText((String) DJ);
-                	
-                	
-                	
-                	
-                }
-                
+				int selectedRow = tableShow.getSelectedRow();// 获得选中行的索引
+				if (selectedRow != -1) // 存在选中行
+				{
+					// ID 书名", "作者", "出版社", "出版日期", "单价",
+					// "数量", "总价", "ISBN", "图书分类", "图书语言", "开本", "装帧", "特征"
+					Object ID = defaultModel.getValueAt(selectedRow, 0);
+					Object NM = defaultModel.getValueAt(selectedRow, 1);
+					Object ZZ = defaultModel.getValueAt(selectedRow, 2);
+					Object CBS = defaultModel.getValueAt(selectedRow, 3);
+					Object CBRQ = defaultModel.getValueAt(selectedRow, 4);
+					Object DJ = defaultModel.getValueAt(selectedRow, 5);
+					Object SL = defaultModel.getValueAt(selectedRow, 6);
+					Object ZJ = defaultModel.getValueAt(selectedRow, 7);
+					Object ISBN = defaultModel.getValueAt(selectedRow, 8);
+					Object TSFL = defaultModel.getValueAt(selectedRow, 9);
+					Object YY = defaultModel.getValueAt(selectedRow, 10);
+					Object KB = defaultModel.getValueAt(selectedRow, 10);
+					Object ZhuangZ = defaultModel.getValueAt(selectedRow, 12);
+					Object TZ = defaultModel.getValueAt(selectedRow, 13);
+
+					add_gai.textField_BookName.setText((String) NM);
+					add_gai.textField_BookISBN.setText((String) ISBN);
+					add_gai.textField_BookNum.setText((String) SL);
+					add_gai.textField_Author.setText((String) ZZ);
+					add_gai.textField_fenlei.setText((String) TSFL);
+					add_gai.textField_kaiben.setText((String) KB);
+					add_gai.textField_lang.setText((String) YY);
+					add_gai.textField_press.setText((String) CBS);
+					add_gai.textField_tezhen.setText((String) TZ);
+					add_gai.textField_total.setText((String) ZJ);
+					add_gai.textField_zhuangzhen.setText((String) ZhuangZ);
+					add_gai.textField_press_date.setText((String) CBRQ);
+					add_gai.textField_Price.setText((String) DJ);
+
+				}
+
 			}
 		});
 		panel.add(button_1);
-		
-		button_2 = new JButton("\u5220\u9664");//删除
+
+		button_2 = new JButton("\u5220\u9664");// 删除
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	                int selectedRow = tableShow.getSelectedRow();//获得选中行的索引
-	                if(selectedRow!=-1)  //存在选中行
-	                {
-	                	del_isbn = (long) defaultModel.getValueAt(selectedRow, 8);
-						BookOp.delBook(del_isbn);
-	                    defaultModel.removeRow(selectedRow);  //删除行      删除数据库未写
-	                }
-	            }
+				int selectedRow = tableShow.getSelectedRow();// 获得选中行的索引
+				if (selectedRow != -1) // 存在选中行
+				{
+					del_isbn = (long) defaultModel.getValueAt(selectedRow, 8);
+					BookOp.delBook(del_isbn);
+					defaultModel.removeRow(selectedRow); // 删除行 删除数据库未写
+				}
+			}
 		});
 		panel.add(button_2);
-=======
->>>>>>> origin/master
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 33, 1000, 600);

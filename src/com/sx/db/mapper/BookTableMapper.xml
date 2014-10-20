@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="getBookByBookName" resultType="com.sx.entity.Book">
-		select * from booktable BookName = #{BookName}
+		select * from booktable where BookName = #{BookName}
 	</select>
 	
 	<delete id="delBook" parameterType ="com.sx.entity.Book">

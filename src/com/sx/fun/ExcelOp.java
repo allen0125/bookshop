@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sx.entity.Book;
+import com.sx.util.DbMetadata;
 import com.sx.util.DbTitle;
 import com.sx.util.ExcelTitle;
 
@@ -206,10 +207,11 @@ public class ExcelOp {
 	}
 
 	/*
-	 * 导出booktable数据库内容到excel
+	 * 导出booktable数据库内容到excel param: fileName:导出名称 tableName:要导出的表名
 	 */
 	// 使用POI创建excel工作簿
-	public static void createWorkBook(String fileName) throws IOException {
+	public static void createWorkBook(String fileName, String tableName)
+			throws IOException {
 		// 创建excel工作簿
 		Workbook wb = new HSSFWorkbook();
 		// 创建第一个sheet（页），命名为 new sheet
@@ -219,7 +221,7 @@ public class ExcelOp {
 		// Row 和 Cell 都是从0开始计数的
 
 		// 创建一行，在页sheet上
-		Row row = sheet.createRow((short) 0);
+		Row row = setHeader(sheet, tableName);
 		// 在row行上创建一个方格
 		Cell cell = row.createCell(0);
 		// 设置方格的显示
@@ -238,12 +240,18 @@ public class ExcelOp {
 		fileOut.close();
 	}
 
-	private static Row setHeader(Sheet sheet) {
-		Row row = sheet.createRow(0);
+	/*
+	 * 设置数据库导出时候的第一行表头内容
+	 */
+	private static Row setHeader(Sheet sheet, String tableName) {
+		Row row = sheet.createRow(0); // 第一行
 		row.createCell(0).setCellValue("ID");
-		row.createCell(1).setCellValue(ExcelTitle.BOOKNAME);
-//		row.createCell(2).setCellValue();
-
+		List<String> columnList = DbMetadata.getColumns(tableName);
+		int i = 1;
+		for (String str : columnList) {
+			row.createCell(i).setCellValue(str);
+			i++;
+		}
 		return row;
 	}
 

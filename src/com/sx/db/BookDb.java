@@ -6,12 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.db.SQLBuilder;
-
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import com.sx.db.mapper.BookTableMapper;
 import com.sx.entity.Book;
-import com.sx.fun.BookOp;
 
 public class BookDb {
 	private static final Logger LOGGER = LoggerFactory.getLogger(BookDb.class);
@@ -43,7 +39,19 @@ public class BookDb {
 			session.close();
 		}
 	}
-	
+
+	public static void insertBook(Book book) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			mapper.insertBook(book);
+			session.commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
 
 	public static List<Book> getBookByISBN(long ISBN) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
@@ -89,15 +97,17 @@ public class BookDb {
 		}
 		return list;
 	}
-	public static void delBook(long ISBN){
+
+	public static void delBook(long ISBN) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {
-			SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 			BookTableMapper delbook = session.getMapper(BookTableMapper.class);
 			delbook.delBook(ISBN);
 			session.commit();
-			session.close();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
 		}
 	}
 }

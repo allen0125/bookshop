@@ -17,11 +17,14 @@ public class BookOp {
 		return BookDb.getBookList();
 	}
 
+	public static void insertBook(Book book) {
+		BookDb.insertBook(book);
+	}
+
 	public static void insertBooks(List<Book> bookList) throws Exception {
 		BookDb.insertBookList(bookList);
 	}
-	
-	
+
 	public static List<Book> getBookByISBN(long ISBN) {
 		return BookDb.getBookByISBN(ISBN);
 	}
@@ -33,11 +36,8 @@ public class BookOp {
 	public static List<Book> getBookByBookName(String BookName) {
 		return BookDb.getBookByBookName(BookName);
 	}
-<<<<<<< HEAD
-	
-	public static void delBook(long ISBN){
+
+	public static void delBook(long ISBN) {
 		BookDb.delBook(ISBN);
 	}
-=======
->>>>>>> origin/master
 }
