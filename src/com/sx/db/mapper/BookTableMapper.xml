@@ -19,6 +19,10 @@
 		select * from booktable BookName = #{BookName}
 	</select>
 	
+	<delete id="delBook" parameterType ="com.sx.entity.Book">
+		delete from booktable where ISBN=#{ISBN}
+	</delete>	
+	
 	<insert id="insertBook" parameterType="com.sx.entity.Book">
 		insert into booktable
 		(
