@@ -124,18 +124,18 @@ public class BookManage extends JPanel {
 					Object TZ = defaultModel.getValueAt(selectedRow, 13);
 
 					add_gai.textField_BookName.setText((String) NM);
-					add_gai.textField_BookISBN.setText((String) ISBN);
-					add_gai.textField_BookNum.setText((String) SL);
+					add_gai.textField_BookISBN.setText(String.valueOf(ISBN));
+					add_gai.textField_BookNum.setText(String.valueOf(SL));
 					add_gai.textField_Author.setText((String) ZZ);
 					add_gai.textField_fenlei.setText((String) TSFL);
 					add_gai.textField_kaiben.setText((String) KB);
 					add_gai.textField_lang.setText((String) YY);
 					add_gai.textField_press.setText((String) CBS);
 					add_gai.textField_tezhen.setText((String) TZ);
-					add_gai.textField_total.setText((String) ZJ);
-					add_gai.textField_zhuangzhen.setText((String) ZhuangZ);
+					add_gai.textField_total.setText(String.valueOf(ZJ));
+					add_gai.textField_zhuangzhen.setText((String)ZhuangZ);
 					add_gai.textField_press_date.setText((String) CBRQ);
-					add_gai.textField_Price.setText((String) DJ);
+					add_gai.textField_Price.setText(String.valueOf(DJ));
 
 				}
 
