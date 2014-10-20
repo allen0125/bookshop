@@ -32,7 +32,4 @@ public class BookOp {
 	public static List<Book> getBookByBookName(String BookName) {
 		return BookDb.getBookByBookName(BookName);
 	}
-//	public static List<Book> delBook(String BookName){
-		
-//	}
 }
