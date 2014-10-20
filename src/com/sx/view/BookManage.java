@@ -97,6 +97,7 @@ public class BookManage extends JPanel {
 		});
 		panel.add(button);
 
+//test
 		button_1 = new JButton("\u4FEE\u6539");// ÐÞ¸Ä
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
