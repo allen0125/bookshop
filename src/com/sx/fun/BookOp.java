@@ -33,11 +33,8 @@ public class BookOp {
 	public static List<Book> getBookByBookName(String BookName) {
 		return BookDb.getBookByBookName(BookName);
 	}
-<<<<<<< HEAD
 	
 	public static void delBook(long ISBN){
 		BookDb.delBook(ISBN);
 	}
-=======
->>>>>>> origin/master
 }
