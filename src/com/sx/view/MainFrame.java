@@ -18,7 +18,7 @@ import com.sx.fun.ExcelOp;
 
 public class MainFrame extends JFrame {
 	BookManage bookManage = new BookManage(1000);
-
+	ReaderManage readerManage = new ReaderManage(1000);
 	/**
 	 * Launch the application.
 	 */
@@ -81,6 +81,15 @@ public class MainFrame extends JFrame {
 
 		JMenu menuReaderManage = new JMenu("\u8BFB\u8005\u7BA1\u7406");
 		menuBar.add(menuReaderManage);
+		
+		JButton button = new JButton("\u8BFB\u8005\u7BA1\u7406");//∂¡’ﬂπ‹¿Ì
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(readerManage);
+				validate();
+			}
+		});
+		menuReaderManage.add(button);
 
 		JMenu menuBorrowBook = new JMenu("\u501F\u4E66");
 		menuBar.add(menuBorrowBook);
