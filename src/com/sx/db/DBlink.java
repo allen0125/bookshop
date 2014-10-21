@@ -15,6 +15,8 @@ public class DBlink {
 	// "jdbc:oracle:thin:@localhost:1521:ORCL";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "123456";
+	private Statement stmt;
+	private ResultSet rs;
 
 	static {
 		try {
@@ -52,6 +54,19 @@ public class DBlink {
 				conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public ResultSet getResult(String strSQL) // Ö´ÐÐstrSQLÓï¾ä
+	{
+		try {
+			stmt = getConnection().createStatement();
+			rs = stmt.executeQuery(strSQL);
+			return rs;
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

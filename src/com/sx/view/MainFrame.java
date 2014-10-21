@@ -13,8 +13,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.sx.util.FileUtil;
 import com.sx.fun.ExcelOp;
+import com.sx.util.Constant;
+import com.sx.util.FileUtil;
 
 public class MainFrame extends JFrame {
 	BookManage bookManage = new BookManage(1000);
@@ -50,29 +51,72 @@ public class MainFrame extends JFrame {
 		JMenu menu = new JMenu("\u7CFB\u7EDF\u8BBE\u7F6E");
 		menuBar.add(menu);
 
-		JMenuItem mntmImportExcel = new JMenuItem(
+		/*
+		 * 导入book-excel
+		 */
+		JMenuItem mntmImportBookExcel = new JMenuItem(
 				"\u5BFC\u5165\u56FE\u4E66excel...");
-		mntmImportExcel.addActionListener(new ActionListener() { // 导入excel
-					public void actionPerformed(ActionEvent e) {
-						File file = FileUtil.openFile();
-						if (file != null) {
-							try {
-								ExcelOp.importExcel(file);
-							} catch (Exception e1) {
-								System.err.println(e1.getMessage());
-							}
-						}
+		mntmImportBookExcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				File file = FileUtil.openFile();
+				if (file != null) {
+					try {
+						ExcelOp.importBookExcel(file);
+					} catch (Exception e1) {
+						System.err.println(e1.getMessage());
 					}
-				});
-		menu.add(mntmImportExcel);
+				}
+			}
+		});
+		menu.add(mntmImportBookExcel);
 
-		JMenuItem mntmExportExcel = new JMenuItem("\u5BFC\u51FAexcel...");
-		menu.add(mntmExportExcel);
+		/*
+		 * 导出book-Excel表
+		 */
+		JMenuItem mntmExportBookExcel = new JMenuItem(
+				"\u5BFC\u51FA\u56FE\u4E66excel");
+		mntmExportBookExcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fileName = FileUtil.genExcelFileName(Constant.BookTable);
+				ExcelOp.exportExcel(fileName, Constant.BookTable);
+			}
+		});
+		/*
+		 * 导入读者excel
+		 */
+		JMenuItem mntmImportReaderExcel = new JMenuItem(
+				"\u5BFC\u5165\u8BFB\u8005excel...");
+		mntmImportReaderExcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				File file = FileUtil.openFile();
+				if (file != null) {
+					try {
+						// ExcelOp.importExcel(file);
+					} catch (Exception e1) {
+						System.err.println(e1.getMessage());
+					}
+				}
+			}
+		});
+		menu.add(mntmImportReaderExcel);
+		menu.add(mntmExportBookExcel);
+
+		/*
+		 * 导出读者表到excel
+		 */
+		JMenuItem mntmexcel = new JMenuItem("\u5BFC\u51FA\u8BFB\u8005excel");
+		mntmexcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fileName = FileUtil.genExcelFileName(Constant.UserTable);
+				ExcelOp.exportExcel(fileName, Constant.UserTable);
+			}
+		});
+		menu.add(mntmexcel);
 
 		JButton btnBookManage = new JButton("\u4E66\u7C4D\u7BA1\u7406");
 		btnBookManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Dimension frameDim = getSize(); // 为了获取frame的宽度
+				// Dimension frameDim = getSize(); // 为了获取frame的宽度
 				setContentPane(bookManage);
 				validate();
 			}
@@ -86,5 +130,4 @@ public class MainFrame extends JFrame {
 		menuBar.add(menuBorrowBook);
 		setVisible(true);
 	}
-
 }

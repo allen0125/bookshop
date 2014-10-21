@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +25,9 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sx.db.DBlink;
 import com.sx.entity.Book;
+import com.sx.util.Constant;
 import com.sx.util.DbMetadata;
 import com.sx.util.DbTitle;
 import com.sx.util.ExcelTitle;
@@ -38,9 +42,9 @@ public class ExcelOp {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExcelOp.class);
 
 	/*
-	 * 使用poi读取excel导入数据库
+	 * 使用poi读取book-excel导入数据库
 	 */
-	public static void importExcel(File file) {
+	public static void importBookExcel(File file) {
 		boolean flag = true; // 执行是否成功的标志位
 		// poi读取excel
 		// 创建要读入的文件的输入流
@@ -51,7 +55,8 @@ public class ExcelOp {
 			flag = false;
 			LOGGER.error(e.getMessage());
 			LOGGER.error(e.getStackTrace().toString());
-			String errorMsg = String.format("File %s not found!",
+			String errorMsg = String.format(
+					"\u6587\u4ef6 %s \u4e0d\u5b58\u5728!", // 文件不存在
 					file.getAbsoluteFile());
 			LOGGER.error(errorMsg);
 			JOptionPane.showMessageDialog(null, errorMsg, "错误",
@@ -210,8 +215,9 @@ public class ExcelOp {
 	 * 导出booktable数据库内容到excel param: fileName:导出名称 tableName:要导出的表名
 	 */
 	// 使用POI创建excel工作簿
-	public static void createWorkBook(String fileName, String tableName)
-			throws IOException {
+	public static void exportExcel(String fileName, String tableName) {
+		boolean flag = true; // 判断是否执行成功
+
 		// 创建excel工作簿
 		Workbook wb = new HSSFWorkbook();
 		// 创建第一个sheet（页），命名为 new sheet
@@ -219,25 +225,71 @@ public class ExcelOp {
 		// Row 行
 		// Cell 方格
 		// Row 和 Cell 都是从0开始计数的
+		// 创建第一行，在页sheet上
+		setHeader(sheet, tableName);
 
-		// 创建一行，在页sheet上
-		Row row = setHeader(sheet, tableName);
-		// 在row行上创建一个方格
-		Cell cell = row.createCell(0);
-		// 设置方格的显示
-		cell.setCellValue(1);
+		// 根据表名填充数据
+		String sqlString = "select * from " + tableName;
+		DBlink dBlink = new DBlink();
+		ResultSet rs = dBlink.getResult(sqlString);
 
-		// Or do it on one line.
-		row.createCell(1).setCellValue(1.2);
-		row.createCell(2).setCellValue("This is a string 速度反馈链接");
-		row.createCell(3).setCellValue(true);
+		int i = 1; // 设置行号
+		try {
+			while (rs.next()) {
+				Row r = sheet.createRow(i);
+				int colNum = rs.getMetaData().getColumnCount();
+				Cell cell = r.createCell(0);
+				cell.setCellValue(i);
+				for (int j = 1; j < colNum; j++) {
+					cell = r.createCell(j);
+					cell.setCellValue(rs.getString(j + 1));
+				}
+				i++;
+			}
+		} catch (SQLException e) {
+			flag = false;
+			LOGGER.error("A SQLException when export data to excel.");
+			LOGGER.error(e.getMessage());
+			LOGGER.error(e.getStackTrace().toString());
+		} finally {
+			DBlink.closeConnection(rs, null, null); // is there a problem?
+		}
 
 		// 创建一个文件 命名为workbook.xls
-		FileOutputStream fileOut = new FileOutputStream(fileName);
+		FileOutputStream fileOut = null;
+		try {
+			fileOut = new FileOutputStream(fileName);
+		} catch (FileNotFoundException e) {
+			flag = false;
+			JOptionPane.showMessageDialog(null, Constant.fileNotFoundError,
+					"错误", JOptionPane.ERROR_MESSAGE);
+			LOGGER.error("A FileNotFoundException when export data to excel.");
+			LOGGER.error(e.getMessage());
+			LOGGER.error(e.getStackTrace().toString());
+		}
 		// 把上面创建的工作簿输出到文件中
-		wb.write(fileOut);
+		try {
+			wb.write(fileOut);
+		} catch (IOException e) {
+			flag = false;
+			LOGGER.error("A IOException when export data to excel.");
+			LOGGER.error(e.getMessage());
+			LOGGER.error(e.getStackTrace().toString());
+		}
 		// 关闭输出流
-		fileOut.close();
+		try {
+			fileOut.close();
+		} catch (IOException e) {
+			flag = false;
+			LOGGER.error("A IOException when export data to excel(close fileoutput stream).");
+			LOGGER.error(e.getMessage());
+			LOGGER.error(e.getStackTrace().toString());
+		}
+
+		if (true == flag) {
+			JOptionPane.showMessageDialog(null, "导出" + fileName + "成功", "成功",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	/*
@@ -247,12 +299,11 @@ public class ExcelOp {
 		Row row = sheet.createRow(0); // 第一行
 		row.createCell(0).setCellValue("ID");
 		List<String> columnList = DbMetadata.getColumns(tableName);
-		int i = 1;
-		for (String str : columnList) {
+		String str = "";
+		for (int i = 1; i < columnList.size(); i++) {
+			str = columnList.get(i);
 			row.createCell(i).setCellValue(str);
-			i++;
 		}
 		return row;
 	}
-
 }

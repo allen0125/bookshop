@@ -58,10 +58,8 @@ public class DbMetadata {
 			rs = dbmd.getColumns(null, null, tableName, null);
 			while (rs.next()) {
 				String columnName = rs.getString("COLUMN_NAME"); // 获取列名
-				String dataType = rs.getString("DATA_TYPE");// 字段数据类型(对应java.sql.Types中的常量)
-				String typeName = rs.getString("TYPE_NAME");// 字段类型名称(例如：VACHAR2)
-				System.out
-						.println(columnName + " " + dataType + ":" + typeName);
+//				String dataType = rs.getString("DATA_TYPE");// 字段数据类型(对应java.sql.Types中的常量)
+//				String typeName = rs.getString("TYPE_NAME");// 字段类型名称(例如：VACHAR2)
 				columnList.add(columnName);
 			}
 		} catch (SQLException e) {
@@ -73,4 +71,5 @@ public class DbMetadata {
 		}
 		return columnList;
 	}
+	
 }
