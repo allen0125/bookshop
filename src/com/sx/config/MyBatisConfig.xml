@@ -22,5 +22,6 @@
 
 	<mappers>
 		<mapper resource="com/sx/db/mapper/BookTableMapper.xml"/>
+		<mapper resource="com/sx/db/mapper/ReaderTableMapper.xml"/>
 	</mappers>
 </configuration>
