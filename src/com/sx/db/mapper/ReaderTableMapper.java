@@ -16,7 +16,7 @@ public interface ReaderTableMapper {
 	void delReader(int UID);
 	
 	void insertReader(Reader reader);
-	
+	void updateReader(Reader reader);
 	
 	
 	

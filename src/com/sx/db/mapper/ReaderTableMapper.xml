@@ -29,6 +29,9 @@
 		delete from usertable where UID=#{UID}
 	</delete>	
 
+<update id="updateReader" parameterType ="com.sx.entity.Reader" >
+	update usertable set UID = #{UID},Name = #{name},Sex = #{Sex},UserGrade = #{UserGrade},HistoryCount = #{HistoryCount},LimitCount = #{LimitCount} where UID = #{UID}
+</update>
 	
 	<insert id="insertReader" parameterType="com.sx.entity.Reader">
 		insert into usertable

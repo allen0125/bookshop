@@ -1,10 +1,12 @@
 package com.sx.view;
+import org.omg.CORBA.PRIVATE_MEMBER;
+
 import com.sx.entity.*;
 import com.sx.fun.*;
 
 public class AddReaderFrame extends ReaderFrame {
-
-	public AddReaderFrame(String framename) {
+	private static String framename = "ÃÌº”∂¡’ﬂ";
+	public AddReaderFrame() {
 		super(framename);
 		}
 

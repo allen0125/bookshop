@@ -76,6 +76,19 @@ public class ReaderDb {
 		}
 	}
 	
+	public static void updateReader(Reader reader) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		try {
+			ReaderTableMapper mapper = session.getMapper(ReaderTableMapper.class);
+			mapper.updateReader(reader);
+			session.commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
+	
 	
 //	添加单个读者
 	

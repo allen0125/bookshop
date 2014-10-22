@@ -96,7 +96,7 @@ public class ReaderManage extends JPanel {
 		JButton button_1 = new JButton("\u6DFB\u52A0");//添加
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AddReaderFrame add_book = new AddReaderFrame("添加读者");
+				AddReaderFrame add_book = new AddReaderFrame();
 				add_book.setVisible(true);
 				
 			}
@@ -104,6 +104,29 @@ public class ReaderManage extends JPanel {
 		panel.add(button_1);
 		
 		JButton button_2 = new JButton("\u4FEE\u6539");//修改
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ModifyReaderFrame modify = new ModifyReaderFrame();
+				modify.setVisible(true);
+				int selectedRow = tableShow.getSelectedRow();// 获得选中行的索引
+				if (selectedRow != -1) // 存在选中行
+				{
+					Object ID = defaultModel.getValueAt(selectedRow, 1);
+					Object Name = defaultModel.getValueAt(selectedRow, 2);
+					Object Sex = defaultModel.getValueAt(selectedRow, 3);
+					Object Grede = defaultModel.getValueAt(selectedRow, 4);
+					Object HisNum = defaultModel.getValueAt(selectedRow, 5);
+					Object LimNum = defaultModel.getValueAt(selectedRow, 6);
+					
+					modify.textField_rNum.setText(String.valueOf(ID));
+					modify.textField_rName.setText((String) Name);
+					modify.textField_rSex.setText((String) Sex);
+					modify.textField_rGrade.setText((String) Grede);
+					modify.textField_rHisNum.setText(String.valueOf(HisNum));
+					modify.textField_rLimNum.setText(String.valueOf(LimNum));
+				}
+			}
+		});
 		panel.add(button_2);
 		
 		JButton button_3 = new JButton("\u5220\u9664");

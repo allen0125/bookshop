@@ -31,15 +31,20 @@ public class ModifyBookFrame extends BookFrame {
 		
 		List<Book>books=BookOp.getBookByISBN(Long.valueOf((String)isbnObject));
 		Book book = books.get(0);
-		
 		book.setAuthor((String)textField_Author.getText());
 		book.setBookName((String)textField_BookName.getText());
 		book.setPress((String)textField_press.getText());
 		book.setPressDate((String)textField_press_date.getText());
 		book.setPrice(Double.valueOf((String)textField_Price.getText()));
 		book.setISBN(Long.valueOf((String)textField_BookISBN.getText()));
+		book.setTotalPrice(Double.valueOf((String)textField_total.getText()));
+		book.setCount(Integer.valueOf((String)textField_BookNum.getText()));
+		book.setBinding((String)textField_zhuangzhen.getText());
+		book.setLanguage((String)textField_lang.getText());
+		book.setSize((String)textField_kaiben.getText());
+		book.setBookCategory((String)textField_fenlei.getText());
+		book.setFeature((String)textField_tezhen.getText());
 		BookOp.updateBook(book);
-		
 		this.dispose();
 	}
 }
