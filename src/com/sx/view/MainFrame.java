@@ -134,9 +134,9 @@ public class MainFrame extends JFrame {
 			}
 		});
 		menuReaderManage.add(button);
-
-		JMenu menuBorrowBook = new JMenu("\u501F\u4E66");
-		menuBar.add(menuBorrowBook);
+		
+		JButton buttonBorrowBook = new JButton("\u501F\u4E66");
+		menuBar.add(buttonBorrowBook);
 		setVisible(true);
 	}
 }
