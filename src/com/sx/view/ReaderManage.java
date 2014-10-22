@@ -3,6 +3,7 @@ package com.sx.view;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -24,9 +25,10 @@ import java.awt.event.ActionEvent;
 public class ReaderManage extends JPanel {
 	private JTextField textField;
 	private JTable tableShow;
-	private int del_userid;
+	private int del_uid;
 	List<Reader> readerlist;
 	DefaultTableModel defaultModel;
+	JScrollPane scrollPane;
 
 	
 	/**
@@ -50,7 +52,32 @@ public class ReaderManage extends JPanel {
 		panel.add(textField);
 		textField.setColumns(20);
 		
-		JButton button = new JButton("\u67E5\u8BE2");
+		JButton button = new JButton("\u67E5\u8BE2");//查询按钮
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					if (textField.getText().equals("")) {
+						readerlist = ReaderOp.getReaders();
+						scrollPane.setViewportView(refreshTable(readerlist));
+						return;
+					}
+
+					if (comboBox.getSelectedItem().toString().trim().equals("\u7F16\u53F7")) {
+						 int UID= 0;
+						try {
+							UID = Integer.parseInt(textField.getText());
+							readerlist = ReaderOp.getReaderByUID(UID);
+							scrollPane.setViewportView(refreshTable(readerlist));
+							scrollPane.validate();
+						} catch (NumberFormatException nume) {
+							JOptionPane.showMessageDialog(null, "非法输入！", "错误",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			
+				
+			}
+		);
 		panel.add(button);
 		
 		JButton button_1 = new JButton("\u6DFB\u52A0");
@@ -65,9 +92,9 @@ public class ReaderManage extends JPanel {
 					int selectedRow = tableShow.getSelectedRow();// 获得选中行的索引
 					if (selectedRow != -1) // 存在选中行
 					{
-						del_userid = Integer.valueOf((String) defaultModel.getValueAt(selectedRow, 2));
-						ReaderOp.delreader(del_userid);
-						defaultModel.removeRow(selectedRow); // 删除行 删除数据库未写
+						del_uid = (int) defaultModel.getValueAt(selectedRow, 1);
+						ReaderOp.delreader(del_uid);
+						defaultModel.removeRow(selectedRow); 
 					}
 				}
 			
@@ -75,7 +102,7 @@ public class ReaderManage extends JPanel {
 		});
 		panel.add(button_3);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 31, 1000, 600);
 		readerlist = ReaderOp.getReaders();
 		scrollPane.setViewportView(getShowTable(readerlist));
@@ -127,7 +154,7 @@ public class ReaderManage extends JPanel {
 			Vector<Object> data = new Vector<>();
 			reader = readerlist.get(i);
 			data.add(i + 1);
-			data.add(reader.getUserID());
+			data.add(reader.getUID());
 			data.add(reader.getName());
 			data.add(reader.getSex());
 			data.add(reader.getUserGrade());

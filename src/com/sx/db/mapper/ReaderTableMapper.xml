@@ -8,8 +8,8 @@
 	select * from usertable
 </select>
 
-<select id="getReaderByUserID" resultType="com.sx.entity.Reader">
-	select * from usertable when UserID = #{UserID}
+<select id="getReaderByUID" resultType="com.sx.entity.Reader">
+	select * from usertable when UID = #{UID}
 </select>
 
 <select id="getReaderByName" resultType="com.sx.entity.Reader">
@@ -26,7 +26,7 @@
 
 
 	<delete id="delReader" parameterType ="com.sx.entity.Reader">
-		delete from booktable where UID=#{UID}
+		delete from usertable where UID=#{UID}
 	</delete>	
 
 	

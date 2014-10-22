@@ -15,8 +15,11 @@ public class ReaderOp {
 	public static List<Reader> getReaderByName(String Name){
 		return ReaderDb.getReaderByName(Name);
 		}
-	public static void delreader(int UserID){
-		ReaderDb.delReader(UserID);
+	public static void delreader(int UID){
+		ReaderDb.delReader(UID);
 	}
 	
+	public static List<Reader> getReaderByUID(int UID){
+		return ReaderDb.getReaderByUID(UID);
+	}
 }
