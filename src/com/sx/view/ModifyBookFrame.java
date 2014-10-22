@@ -1,4 +1,8 @@
 package com.sx.view;
+import java.util.List;
+
+import org.apache.poi.ss.formula.functions.Index;
+
 import com.sx.view.*;
 import com.sx.entity.Book;
 import com.sx.fun.*;
@@ -24,7 +28,18 @@ public class ModifyBookFrame extends BookFrame {
 		Object siziObject = textField_kaiben.getText();
 		Object zhuangzhenObject = textField_zhuangzhen.getText();
 		Object tezhenObject = textField_tezhen.getText();
-		Book book = null;
 		
+		List<Book>books=BookOp.getBookByISBN(Long.valueOf((String)isbnObject));
+		Book book = books.get(0);
+		
+		book.setAuthor((String)textField_Author.getText());
+		book.setBookName((String)textField_BookName.getText());
+		book.setPress((String)textField_press.getText());
+		book.setPressDate((String)textField_press_date.getText());
+		book.setPrice(Double.valueOf((String)textField_Price.getText()));
+		book.setISBN(Long.valueOf((String)textField_BookISBN.getText()));
+		BookOp.updateBook(book);
+		
+		this.dispose();
 	}
 }

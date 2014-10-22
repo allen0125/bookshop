@@ -19,6 +19,10 @@
 		select * from booktable where BookName = #{BookName}
 	</select>
 	
+	<update id="updateBook" parameterType ="com.sx.entity.Book">
+		update booktable set BookName=#{bookName}, Author = #{author}, Press = #{press}, PressDate = #{pressDate}, Price = #{price}, Count=#{count},
+		TotalPrice = #{totalPrice}, ISBN = #{ISBN}, BookCategory = #{bookCategory}, Language = #{language}, Size = #{size}, Binding = #{binding}, Feature = #{feature} where BID = #{BID}
+	</update>
 	
 		<select id="getBookByBookBID" resultType="com.sx.entity.Book">
 		select * from booktable where BID = #{BID}

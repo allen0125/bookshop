@@ -22,11 +22,11 @@ import com.sx.fun.BookOp;
 
 public class BookManage extends JPanel {
 	private JTextField textField;
-	private JTable tableShow;
+	JTable tableShow;
 	DefaultTableModel defaultModel;
 	private JPanel panel = null;
 	private JLabel labelSearch;
-	private JComboBox comboBox;
+	JComboBox comboBox;
 	private String selected;
 	List<Book> bookList;
 	JScrollPane scrollPane;

@@ -22,4 +22,5 @@ public interface BookTableMapper {
 	
 	void delBook(long ISBN);
 	void insertBook(Book book);
+	public  void updateBook(Book book);
 }

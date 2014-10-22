@@ -22,8 +22,7 @@ public class BookOp {
 	}
 
 	public static void updateBook(Book book){
-		
-		
+		BookDb.updateBook(book);
 	}
 	
 	public static void insertBooks(List<Book> bookList) throws Exception {

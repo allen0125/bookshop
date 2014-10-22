@@ -40,6 +40,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setTitle("\u56FE\u4E66\u7BA1\u7406\u7CFB\u7EDF");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Toolkit tool = getToolkit();
 		Dimension dim = tool.getScreenSize(); // µÃµ½ÆÁÄ»³¤¿í
