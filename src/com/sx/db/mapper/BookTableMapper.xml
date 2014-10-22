@@ -19,6 +19,11 @@
 		select * from booktable where BookName = #{BookName}
 	</select>
 	
+	
+		<select id="getBookByBookBID" resultType="com.sx.entity.Book">
+		select * from booktable where BID = #{BID}
+	</select>
+	
 	<delete id="delBook" parameterType ="com.sx.entity.Book">
 		delete from booktable where ISBN=#{ISBN}
 	</delete>	

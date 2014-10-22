@@ -52,7 +52,7 @@ public class BookManage extends JPanel {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "ISBN",
-				"\u4E66\u540D", "\u4F5C\u8005" }));
+				"\u4E66\u540D", "\u4F5C\u8005" }));//书名 作者
 		panel.add(comboBox);
 
 		JLabel labelKeyWords = new JLabel("\u5173\u952E\u5B57");
@@ -76,6 +76,31 @@ public class BookManage extends JPanel {
 					try {
 						ISBN = Long.parseLong(textField.getText());
 						bookList = BookOp.getBookByISBN(ISBN);
+						scrollPane.setViewportView(refreshTable(bookList));
+						scrollPane.validate();
+					} catch (NumberFormatException nume) {
+						JOptionPane.showMessageDialog(null, "非法输入！", "错误",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				
+				if (comboBox.getSelectedItem().toString().trim().equals("\u4E66\u540D")) {
+					String bookNameString = null;
+					try {
+						bookNameString = textField.getText();
+						bookList = BookOp.getBookByBookName(bookNameString);
+						scrollPane.setViewportView(refreshTable(bookList));
+						scrollPane.validate();
+					} catch (NumberFormatException nume) {
+						JOptionPane.showMessageDialog(null, "非法输入！", "错误",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				if (comboBox.getSelectedItem().toString().trim().equals("\u4F5C\u8005")) {//作者
+					String authorString = null;
+					try {
+						authorString = textField.getText();
+						bookList = BookOp.getBookByAuthor(authorString);
 						scrollPane.setViewportView(refreshTable(bookList));
 						scrollPane.validate();
 					} catch (NumberFormatException nume) {

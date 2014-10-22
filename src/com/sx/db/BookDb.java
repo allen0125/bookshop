@@ -67,6 +67,20 @@ public class BookDb {
 		}
 		return list;
 	}
+	public static List<Book> getBookByBID(int BID) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Book> list = null;
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			list = mapper.getBookByBID(BID);
+			session.commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 
 	public static List<Book> getBookByAuthor(String Author) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();

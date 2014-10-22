@@ -29,6 +29,7 @@ public class ReaderManage extends JPanel {
 	List<Reader> readerlist;
 	DefaultTableModel defaultModel;
 	JScrollPane scrollPane;
+	JComboBox comboBox;
 
 	
 	/**
@@ -44,7 +45,7 @@ public class ReaderManage extends JPanel {
 		JLabel label = new JLabel("\u641C\u7D22\u5B57\u6BB5\uFF1A");
 		panel.add(label);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u7F16\u53F7", "\u59D3\u540D"}));
 		panel.add(comboBox);
 		
@@ -73,6 +74,18 @@ public class ReaderManage extends JPanel {
 									JOptionPane.ERROR_MESSAGE);
 						}
 					}
+					if (comboBox.getSelectedItem().toString().trim().equals("\u59D3\u540D")) {
+						 String Name= null;
+						try {
+							Name = textField.getText();
+							readerlist = ReaderOp.getReaderByName(Name);
+							scrollPane.setViewportView(refreshTable(readerlist));
+							scrollPane.validate();
+						} catch (NumberFormatException nume) {
+							JOptionPane.showMessageDialog(null, "非法输入！", "错误",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					}
 				}
 			
 				
@@ -80,10 +93,17 @@ public class ReaderManage extends JPanel {
 		);
 		panel.add(button);
 		
-		JButton button_1 = new JButton("\u6DFB\u52A0");
+		JButton button_1 = new JButton("\u6DFB\u52A0");//添加
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AddReaderFrame add_book = new AddReaderFrame("添加读者");
+				add_book.setVisible(true);
+				
+			}
+		});
 		panel.add(button_1);
 		
-		JButton button_2 = new JButton("\u4FEE\u6539");
+		JButton button_2 = new JButton("\u4FEE\u6539");//修改
 		panel.add(button_2);
 		
 		JButton button_3 = new JButton("\u5220\u9664");

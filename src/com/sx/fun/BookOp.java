@@ -33,6 +33,10 @@ public class BookOp {
 	public static List<Book> getBookByISBN(long ISBN) {
 		return BookDb.getBookByISBN(ISBN);
 	}
+	
+	public static List<Book> getBookByBID(int BID) {
+		return BookDb.getBookByISBN(BID);
+	}
 
 	public static List<Book> getBookByAuthor(String Author) {
 		return BookDb.getBookByAuthor(Author);

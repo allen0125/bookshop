@@ -62,7 +62,6 @@ public class ReaderDb {
 		return list;
 	}
 	
-//	向面板中添加图书列表。
 	
 	public static void insertReaderList(List<Reader> readerlist) throws Exception {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
@@ -78,7 +77,7 @@ public class ReaderDb {
 	}
 	
 	
-//	添加单本图书
+//	添加单个读者
 	
 	
 	public static void insertReader(Reader reader) {

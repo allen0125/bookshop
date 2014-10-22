@@ -22,4 +22,7 @@ public class ReaderOp {
 	public static List<Reader> getReaderByUID(int UID){
 		return ReaderDb.getReaderByUID(UID);
 	}
+	public static void insertReader(Reader reader){
+		ReaderDb.insertReader(reader);
+	}
 }

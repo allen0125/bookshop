@@ -18,6 +18,8 @@ public interface BookTableMapper {
 
 	List<Book> getBookByBookName(String bookName);
 	
+	List<Book> getBookByBID(int BID);
+	
 	void delBook(long ISBN);
 	void insertBook(Book book);
 }
