@@ -8,6 +8,8 @@ import com.sx.entity.Book;
 /**
  * 书籍管理相应的操作类
  * 
+ * （可以改成接口）
+ * 
  * @author sunjie
  *
  */
@@ -21,11 +23,10 @@ public class BookOp {
 		BookDb.insertBook(book);
 	}
 
-	public static void updateBook(Book book){
-		
-		
+	public static void updateBook(Book book) {
+
 	}
-	
+
 	public static void insertBooks(List<Book> bookList) throws Exception {
 		BookDb.insertBookList(bookList);
 	}

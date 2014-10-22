@@ -4,29 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sx.db.mapper.ReaderTableMapper">
 
-<select id="getReaderList" resultType="com.sx.entity.Reader">
-	select * from usertable
-</select>
-
-<select id="getReaderByUID" resultType="com.sx.entity.Reader">
-	select * from usertable when UID = #{UID}
-</select>
-
-<select id="getReaderByName" resultType="com.sx.entity.Reader">
-	select * from usertable when Name = #{Name}
-</select>
-
-<select id="getReaderBySex" resultType="com.sx.entity.Reader">
-	select * from usertable when Sex = #{Sex}
-</select>
-
-<select id="getReaderByUserGrade" resultType="com.sx.entity.Reader">
-	select * from usertable when UserGrade = #{UserGrade}
-</select>
+	<select id="getReaderList" resultType="com.sx.entity.Reader">
+		select * from usertable
+	</select>
+	
+	<select id="getReaderByUID" resultType="com.sx.entity.Reader">
+		select * from usertable where UID = #{UID}
+	</select>
+	
+	<select id="getReaderByName" resultType="com.sx.entity.Reader">
+		select * from usertable where Name = #{Name}
+	</select>
+	
+	<select id="getReaderBySex" resultType="com.sx.entity.Reader">
+		select * from usertable where Sex = #{Sex}
+	</select>
+	
+	<select id="getReaderByUserGrade" resultType="com.sx.entity.Reader">
+		select * from usertable where UserGrade = #{UserGrade}
+	</select>
 
 
 	<delete id="delReader" parameterType ="com.sx.entity.Reader">
-		delete from usertable where UID=#{UID}
+		delete from usertable where UID = #{UID}
 	</delete>	
 
 	
@@ -40,5 +40,13 @@
 			#{UID},#{Name},#{Sex},#{UserGrade},#{HistoryCount},#{LimitCount}
 		)
 	</insert>
+	
+	<update id="decReaderLimit">
+		update usertable set LimitCount = LimitCount - #{borrowBooksCount} where UID=#{UID}
+	</update>
+	
+	<update id="incReaderLimit">
+		update usertable set LimitCount = LimitCount + #{returnBooksCount} where UID=#{UID}
+	</update> 
 </mapper>
 	

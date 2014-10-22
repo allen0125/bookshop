@@ -20,7 +20,7 @@
 	</select>
 	
 	<delete id="delBook" parameterType ="com.sx.entity.Book">
-		delete from booktable where ISBN=#{ISBN}
+		delete from booktable where ISBN = #{ISBN}
 	</delete>	
 	
 	<insert id="insertBook" parameterType="com.sx.entity.Book">
@@ -36,4 +36,30 @@
 		#{feature}
 		)
 	</insert>
+	
+	<!-- 以下操作均和借书有关，需要count>0的 -->
+	<select id="getBookBorrowList" resultType="com.sx.entity.Book">
+		select * from booktable where count > 0
+	</select>
+	
+	<select id="getBookBorrowByISBN" resultType="com.sx.entity.Book">
+		select * from booktable where ISBN = #{ISBN} and count > 0
+	</select>
+
+	<select id="getBookBorrowByAuthor" resultType="com.sx.entity.Book">
+		select * from booktable where Author = #{Author} and count > 0
+	</select>
+	
+	<select id="getBookBorrowByBookName" resultType="com.sx.entity.Book">
+		select * from booktable where BookName = #{BookName} and count > 0
+	</select>
+	
+	<update id="decBookCount" parameterType="com.sx.entity.Book">
+		update booktable set count=count-1 where BID = #{BID};
+	</update>
+	
+	<update id="incBookCount" parameterType="com.sx.entity.Book">
+		update booktable set count=count+1 where BID = #{BID};
+	</update>
+	
 </mapper>

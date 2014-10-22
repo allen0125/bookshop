@@ -27,7 +27,7 @@ public class BookDb {
 		return list;
 	}
 
-	public static void insertBookList(List<Book> bookList) throws Exception {
+	public static void insertBookList(List<Book> bookList) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {
 			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
@@ -106,6 +106,83 @@ public class BookDb {
 			session.commit();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
+
+	/*
+	 * 以下get操作均和借书相关，需要count>0
+	 */
+	public static List<Book> getBookBorrowList() {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Book> bookList = null;
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			bookList = mapper.getBookBorrowList();
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return bookList;
+	}
+
+	public static List<Book> getBookBorrowListByISBN(long ISBN) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Book> bookList = null;
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			bookList = mapper.getBookBorrowByISBN(ISBN);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return bookList;
+	}
+
+	public static List<Book> getBookBorrowListByAuthor(String author) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Book> bookList = null;
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			bookList = mapper.getBookBorrowByAuthor(author);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return bookList;
+	}
+
+	public static List<Book> getBookBorrowListByBookName(String bookName) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Book> bookList = null;
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			bookList = mapper.getBookBorrowByBookName(bookName);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return bookList;
+	}
+
+	public static void decBooks(Book book) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			mapper.decBookCount(book);
+			session.commit();
+		} finally {
+			session.close();
+		}
+	}
+
+	public static void incBooks(Book book) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			mapper.incBookCount(book);
+			session.commit();
 		} finally {
 			session.close();
 		}

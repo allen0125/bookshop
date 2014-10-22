@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sx.db.mapper.BookBrowseMapper">
+	<insert id="insertRecord" parameterType="com.sx.entity.BookBrowser">
+		insert into bookbrowse
+		(BID,UID,BorrowDate,Comment)
+		values
+		(#{BID},#{UID},#{borrowDate},#{comment})
+	</insert>
+	
+	<delete id="deleteRecord">
+		delete from bookbrowse where BID = #{BID}
+	</delete>
+</mapper>

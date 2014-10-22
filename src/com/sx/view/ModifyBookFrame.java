@@ -7,5 +7,4 @@ public class ModifyBookFrame extends BookFrame {
 	public ModifyBookFrame() {
 		super(frameName, btnName);
 	}
-
 }

@@ -18,8 +18,10 @@ import com.sx.util.Constant;
 import com.sx.util.FileUtil;
 
 public class MainFrame extends JFrame {
-	BookManage bookManage = new BookManage(1000);
+	BookManage bookManage = new BookManage();
 	ReaderManage readerManage = new ReaderManage(1000);
+	BookBrowseManage bookBrowseManage = new BookBrowseManage();
+
 	/**
 	 * Launch the application.
 	 */
@@ -125,8 +127,8 @@ public class MainFrame extends JFrame {
 
 		JMenu menuReaderManage = new JMenu("\u8BFB\u8005\u7BA1\u7406");
 		menuBar.add(menuReaderManage);
-		
-		JButton button = new JButton("\u8BFB\u8005\u7BA1\u7406");//读者管理
+
+		JButton button = new JButton("\u8BFB\u8005\u7BA1\u7406");// 读者管理
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setContentPane(readerManage);
@@ -134,8 +136,17 @@ public class MainFrame extends JFrame {
 			}
 		});
 		menuReaderManage.add(button);
-		
-		JButton buttonBorrowBook = new JButton("\u501F\u4E66");
+
+		/*
+		 * 借书管理
+		 */
+		JButton buttonBorrowBook = new JButton("\u501F\u4E66\u7BA1\u7406");
+		buttonBorrowBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setContentPane(bookBrowseManage);
+				validate();
+			}
+		});
 		menuBar.add(buttonBorrowBook);
 		setVisible(true);
 	}

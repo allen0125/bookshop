@@ -23,5 +23,6 @@
 	<mappers>
 		<mapper resource="com/sx/db/mapper/BookTableMapper.xml"/>
 		<mapper resource="com/sx/db/mapper/ReaderTableMapper.xml"/>
+		<mapper resource="com/sx/db/mapper/BookBrowseMapper.xml"/>
 	</mappers>
 </configuration>
