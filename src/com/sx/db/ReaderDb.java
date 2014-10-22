@@ -47,6 +47,21 @@ public class ReaderDb {
 		return list;
 	}
 	
+	public static List<Reader> getReaderByUID(int UID) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Reader> list = null;
+		try {
+			ReaderTableMapper mapper = session.getMapper(ReaderTableMapper.class);
+			list = mapper.getReaderByUID(UID);
+			session.commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
 //	向面板中添加图书列表。
 	
 	public static void insertReaderList(List<Reader> readerlist) throws Exception {
@@ -78,11 +93,11 @@ public class ReaderDb {
 			session.close();
 		}
 	}
-	public static void delReader(int UserID) {
+	public static void delReader(int UID) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {
 			ReaderTableMapper delreader = session.getMapper(ReaderTableMapper.class);
-			delreader.delReader(UserID);
+			delreader.delReader(UID);
 			session.commit();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());

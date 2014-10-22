@@ -11,8 +11,9 @@ public interface ReaderTableMapper {
 	List<Reader> getReaderByName(String Name);
 	List<Reader> getReaderBySex(String Sex);
 	List<Reader> getReaderByUserGrade(String UserGrade);
+	List<Reader> getReaderByUID(int UID);
 	
-	void delReader(int UserID);
+	void delReader(int UID);
 	
 	void insertReader(Reader reader);
 	

@@ -3,7 +3,6 @@ package com.sx.entity;
 public class Reader {
 	
 	private int UID;
-	private int UserID;
 	private String Name;
 	private String Sex;
 	private String UserGrade;
@@ -13,17 +12,9 @@ public class Reader {
 	public int getUID() {
 		return UID;
 	}
-	public void setUID(int uID) {
-		UID = uID;
+	public void setUID(int uid) {
+		UID = uid;
 	}
-	
-	public int getUserID(){
-		return UserID;
-	}
-	public void setUserID(int userID){
-		UserID = userID;
-	}
-	
 	public String getName() {
 		return Name;
 	}
