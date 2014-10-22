@@ -43,7 +43,7 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Toolkit tool = getToolkit();
 		Dimension dim = tool.getScreenSize(); // µÃµ½ÆÁÄ»³¤¿í
-		setBounds((int) ((dim.getWidth() - 1000) / 2), 15, 1000, 700);
+		setBounds((int) ((dim.getWidth() - 1000) / 2), 15, 1030, 700);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
