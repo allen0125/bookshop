@@ -24,4 +24,7 @@ public class ReaderOp {
 	public static void insertReader(Reader reader){
 		ReaderDb.insertReader(reader);
 	}
+	public static void updateReader(Reader reader){
+		ReaderDb.updateReader(reader);
+	}
 }
