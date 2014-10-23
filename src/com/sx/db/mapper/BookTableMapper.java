@@ -5,6 +5,7 @@ package com.sx.db.mapper;
  */
 
 import java.util.List;
+
 import com.sx.entity.Book;
 
 public interface BookTableMapper {
@@ -18,6 +19,8 @@ public interface BookTableMapper {
 
 	List<Book> getBookByBookName(String bookName);
 
+	List<Book> getBookByBID(int BID);
+	
 	void delBook(long ISBN);
 
 	void insertBook(Book book);
@@ -38,4 +41,5 @@ public interface BookTableMapper {
 	void decBookCount(Book book); // 借书时候booktable中书籍数量-1
 
 	void incBookCount(Book book); // 还书时候booktable中书籍数量+1
+	public  void updateBook(Book book);
 }

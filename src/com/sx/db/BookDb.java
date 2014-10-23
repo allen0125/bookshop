@@ -52,6 +52,20 @@ public class BookDb {
 			session.close();
 		}
 	}
+	
+	public static void updateBook(Book book) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			mapper.updateBook(book);
+			session.commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
+
 
 	public static List<Book> getBookByISBN(long ISBN) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
@@ -59,6 +73,20 @@ public class BookDb {
 		try {
 			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
 			list = mapper.getBookByISBN(ISBN);
+			session.commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	public static List<Book> getBookByBID(int BID) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Book> list = null;
+		try {
+			BookTableMapper mapper = session.getMapper(BookTableMapper.class);
+			list = mapper.getBookByBID(BID);
 			session.commit();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());

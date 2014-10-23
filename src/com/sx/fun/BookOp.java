@@ -23,8 +23,8 @@ public class BookOp {
 		BookDb.insertBook(book);
 	}
 
-	public static void updateBook(Book book) {
-
+	public static void updateBook(Book book){
+		BookDb.updateBook(book);
 	}
 
 	public static void insertBooks(List<Book> bookList) throws Exception {
@@ -33,6 +33,10 @@ public class BookOp {
 
 	public static List<Book> getBookByISBN(long ISBN) {
 		return BookDb.getBookByISBN(ISBN);
+	}
+	
+	public static List<Book> getBookByBID(int BID) {
+		return BookDb.getBookByISBN(BID);
 	}
 
 	public static List<Book> getBookByAuthor(String Author) {

@@ -78,8 +78,9 @@ public class ReaderDb {
 		}
 	}
 
-	// 添加单本图书
-
+//	添加单个读者
+	
+	
 	public static void insertReader(Reader reader) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {
@@ -119,7 +120,7 @@ public class ReaderDb {
 			session.close();
 		}
 	}
-
+	//test
 	public static void incReaderLimit(int UID, int returnBooksCount) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {
