@@ -2,6 +2,8 @@ package com.sx.db.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.sx.entity.Reader;
 
 public interface ReaderTableMapper {
@@ -21,6 +23,11 @@ public interface ReaderTableMapper {
 
 	void insertReader(Reader reader);
 
-	void decReaderLimit(int borrowBooksCount, int UID);
+	void decReaderLimit(
+			@Param(value = "borrowBooksCount") int borrowBooksCount,
+			@Param(value = "UID") int UID);
+
 	void incReaderLimit(int returnBooksCount, int UID);
+
+	void updateReader(Reader reader);
 }
