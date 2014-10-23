@@ -139,6 +139,7 @@ public class ReaderLoginDialog extends JDialog {
 			LOGGER.error(e.getStackTrace().toString());
 			// rollback
 			// BookBrowseOp.deleteBookBrowsers(bookBrowsers);
+			return;
 		}
 
 		try {
@@ -155,6 +156,7 @@ public class ReaderLoginDialog extends JDialog {
 			// for (Book b : borrowedBooks) {
 			// BookBrowseOp.incBooks(b);
 			// }
+			return;
 		}
 
 		try {
@@ -169,6 +171,7 @@ public class ReaderLoginDialog extends JDialog {
 			for (Book b : borrowedBooks) {
 				BookBrowseOp.incBooks(b);
 			}
+			return;
 		}
 
 		dispose();
