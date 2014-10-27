@@ -10,6 +10,7 @@ import com.sx.db.BookDb;
 import com.sx.db.ReaderDb;
 import com.sx.entity.Book;
 import com.sx.entity.BookBrowser;
+import com.sx.entity.BookReader;
 import com.sx.entity.Reader;
 
 /**
@@ -37,6 +38,10 @@ public class BookBrowseOp {
 
 	public static void insertBookBrowsers(List<BookBrowser> bookBrowsers) {
 		BookBrowseDb.insertBookBrowsers(bookBrowsers);
+	}
+
+	public static List<Book> getReaderBook(int UID){
+		return BookDb.getReaderBook(UID);
 	}
 	
 	public static void deleteBookBrowsers(List<BookBrowser> bookBrowsers) {

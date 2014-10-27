@@ -1,5 +1,9 @@
 package com.sx.entity;
 
+import java.util.List;
+
+import com.sx.fun.BookBrowseOp;
+
 public class Reader {
 	
 	private int UID;
@@ -8,6 +12,7 @@ public class Reader {
 	private String UserGrade;
 	private int HistoryCount;
 	private int LimitCount;
+	private String HistoryBook;
 	
 	public int getUID() {
 		return UID;
@@ -48,7 +53,7 @@ public class Reader {
 	public String toString() {
 		String retString = "UID=" + UID+ "\tName=" + Name
 				+ "\tSex=" + Sex + "\tUserGrade=" + UserGrade + "HistoryCount="
-				+ HistoryCount + "LimitCount=" + LimitCount;
+				+ HistoryCount + "LimitCount=" + LimitCount + "HistoryBook" + HistoryBook;
 		return retString;
 	}
 	

@@ -6,8 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sx.db.mapper.BookBrowseMapper;
 import com.sx.db.mapper.BookTableMapper;
 import com.sx.entity.Book;
+import com.sx.entity.BookReader;
 
 public class BookDb {
 	private static final Logger LOGGER = LoggerFactory.getLogger(BookDb.class);
@@ -81,6 +83,22 @@ public class BookDb {
 		}
 		return list;
 	}
+	
+	public static List<Book> getReaderBook(int UID) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		List<Book> list = null;
+		try {
+			BookBrowseMapper mapper = session.getMapper(BookBrowseMapper.class);
+			list = mapper.getReaderBook(UID);
+			session.commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
 	public static List<Book> getBookByBID(int BID) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		List<Book> list = null;

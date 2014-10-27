@@ -48,7 +48,7 @@
 	</update>
 	
 	<update id="incReaderLimit">
-		update usertable set LimitCount = LimitCount + #{returnBooksCount} where UID=#{UID}
+		update usertable set LimitCount = LimitCount + 1 where UID=#{UID}
 	</update> 
 </mapper>
 	

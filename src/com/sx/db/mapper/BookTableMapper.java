@@ -21,6 +21,8 @@ public interface BookTableMapper {
 
 	List<Book> getBookByBID(int BID);
 	
+	List<Book> getReaderBook(int UID,int BID);
+	
 	void delBook(long ISBN);
 
 	void insertBook(Book book);

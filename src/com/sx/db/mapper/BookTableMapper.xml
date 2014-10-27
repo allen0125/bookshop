@@ -11,6 +11,7 @@
 		select * from booktable where ISBN = #{ISBN}
 	</select>
 
+
 	<select id="getBookByAuthor" resultType="com.sx.entity.Book">
 		select * from booktable where Author = #{Author}
 	</select>

@@ -10,6 +10,11 @@
 		(#{BID},#{UID},#{borrowDate},#{comment})
 	</insert>
 	
+		
+	<select id="getReaderBook" resultType="com.sx.entity.Book">
+		select * from bookbrowse join booktable where UID=#{UID} and booktable.BID=bookbrowse.BID;
+	</select>
+	
 	<delete id="deleteRecord">
 		delete from bookbrowse where BID = #{BID}
 	</delete>

@@ -16,8 +16,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
+import com.sx.fun.BookBrowseOp;
+import com.sx.fun.BookOp;
+import com.sx.entity.Book;
+import com.sx.entity.BookReader;
 import com.sx.entity.Reader;
 import com.sx.fun.ReaderOp;
+import com.sx.view.*;
 
 public class ReaderManage extends JPanel {
 	private JTextField textField;
@@ -140,6 +147,28 @@ public class ReaderManage extends JPanel {
 
 		});
 		panel.add(button_3);
+		
+		JButton button_4 = new JButton("\u5DF2\u501F\u56FE\u4E66");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int uid;
+				List<Book> books = null;
+				
+				BookName bookName = new BookName();
+				bookName.setVisible(true);
+				int selectedRow = tableShow.getSelectedRow();// 获得选中行的索引
+				if (selectedRow != -1) // 存在选中行
+				{
+					uid = (int) defaultModel.getValueAt(selectedRow, 1);
+					books = BookBrowseOp.getReaderBook(uid);
+					Book book = books.get(0);
+					book = books.get(0);
+					bookName.textField.setText(book.getBookName());
+				}
+				
+			}
+		});
+		panel.add(button_4);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 31, 1000, 600);
@@ -149,7 +178,10 @@ public class ReaderManage extends JPanel {
 		add(scrollPane);
 
 	}
+	
 
+	
+	
 	private JTable refreshTable(List<Reader> readerlist) {
 		if (tableShow == null) {
 			tableShow = new JTable();
@@ -168,7 +200,7 @@ public class ReaderManage extends JPanel {
 		tableShow = new JTable();
 		Object[][] data = new Object[][] {};
 		String[] name = new String[] { "编号", "读者号", "姓名", "性别", "年级", "历史借书数量",
-				"最多借书数量" };
+				"最多借书数量"};
 		defaultModel = new DefaultTableModel(data, name);
 		defaultModel.setColumnCount(7);
 		getReaderDetail(readerlist);
@@ -192,7 +224,7 @@ public class ReaderManage extends JPanel {
 			data.add(reader.getUserGrade());
 			data.add(reader.getHistoryCount());
 			data.add(reader.getLimitCount());
-
+//			data.add(reader.getHistoryBook());
 			defaultModel.addRow(data);
 		}
 	}
