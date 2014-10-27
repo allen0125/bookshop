@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.sx.entity.Book;
 import com.sx.entity.BookBrowser;
-import com.sx.entity.BookReader;
 
 /**
  * all operation about table "bookbrowse"
@@ -21,4 +20,6 @@ public interface BookBrowseMapper {
 	List<Book> getReaderBook(int UID);
 	
 	void deleteRecord(BookBrowser bookBrowser);
+	
+	BookBrowser getBookBrowser(int UID);
 }

@@ -14,4 +14,8 @@ public final class DbTitle {
 	public static final String SIZE = "Size";
 	public static final String BINDING = "Binding";
 	public static final String FEATURE = "Feature";
+	
+	public static final String READERID = "UID";
+	public static final String READERNAME = "Name";
+	public static final String READERGRADE = "UserGrade";
 }

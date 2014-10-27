@@ -33,4 +33,17 @@ public class BookBrowseDb {
 			session.close();
 		}
 	}
+
+	public static BookBrowser getBookBrowser(int UID) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		BookBrowser bb = null;
+		try {
+			BookBrowseMapper mapper = session.getMapper(BookBrowseMapper.class);
+			bb = mapper.getBookBrowser(UID);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return bb;
+	}
 }

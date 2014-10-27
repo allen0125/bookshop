@@ -14,6 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import com.sx.fun.ExcelOp;
+import com.sx.fun.ReaderExcelOp;
 import com.sx.util.Constant;
 import com.sx.util.FileUtil;
 
@@ -94,7 +95,7 @@ public class MainFrame extends JFrame {
 				File file = FileUtil.openFile();
 				if (file != null) {
 					try {
-						// ExcelOp.importExcel(file);
+						ReaderExcelOp.importReaderExcel(file);
 					} catch (Exception e1) {
 						System.err.println(e1.getMessage());
 					}
@@ -136,17 +137,17 @@ public class MainFrame extends JFrame {
 				validate();
 			}
 		});
-		
-				JButton button = new JButton("\u8BFB\u8005\u7BA1\u7406");// 读者管理
-				menuBar.add(button);
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						setContentPane(readerManage);
-						validate();
-					}
-				});
+
+		JButton button = new JButton("\u8BFB\u8005\u7BA1\u7406");// 读者管理
+		menuBar.add(button);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(readerManage);
+				validate();
+			}
+		});
 		menuBar.add(buttonBorrowBook);
-		
+
 		JButton button_1 = new JButton("\u8FD8\u4E66\u7BA1\u7406");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

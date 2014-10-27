@@ -10,7 +10,6 @@ import com.sx.db.BookDb;
 import com.sx.db.ReaderDb;
 import com.sx.entity.Book;
 import com.sx.entity.BookBrowser;
-import com.sx.entity.BookReader;
 import com.sx.entity.Reader;
 
 /**
@@ -40,10 +39,10 @@ public class BookBrowseOp {
 		BookBrowseDb.insertBookBrowsers(bookBrowsers);
 	}
 
-	public static List<Book> getReaderBook(int UID){
+	public static List<Book> getReaderBook(int UID) {
 		return BookDb.getReaderBook(UID);
 	}
-	
+
 	public static void deleteBookBrowsers(List<BookBrowser> bookBrowsers) {
 		BookBrowseDb.deleteBookBrowsers(bookBrowsers);
 	}
@@ -51,7 +50,7 @@ public class BookBrowseOp {
 	public static void decBooks(Book book) {
 		BookDb.decBooks(book);
 	}
-	
+
 	public static void incBooks(Book book) {
 		BookDb.incBooks(book);
 	}
@@ -62,6 +61,13 @@ public class BookBrowseOp {
 
 	public static void incReaderLimit(int UID, int borrowBooksCount) {
 		ReaderDb.incReaderLimit(UID, borrowBooksCount);
+	}
+
+	/*
+	 * get bookbrowser ªÒ»°∂¡’ﬂΩË‘ƒ
+	 */
+	public static BookBrowser getBookBrowser(int UID) {
+		return BookBrowseDb.getBookBrowser(UID);
 	}
 
 	/*

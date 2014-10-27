@@ -27,7 +27,9 @@ public interface ReaderTableMapper {
 			@Param(value = "borrowBooksCount") int borrowBooksCount,
 			@Param(value = "UID") int UID);
 
-	void incReaderLimit(int returnBooksCount, int UID);
+	void incReaderLimit(
+			@Param(value = "returnBooksCount") int returnBooksCount,
+			@Param(value = "UID") int UID);
 
 	void updateReader(Reader reader);
 }

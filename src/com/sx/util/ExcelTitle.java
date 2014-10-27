@@ -14,4 +14,8 @@ public final class ExcelTitle {
 	public static final String SIZE = "开本";
 	public static final String BINDING = "装帧";
 	public static final String FEATURE = "商品特征";
+
+	public static final String READERID = "读者编号";
+	public static final String READERNAME = "读者姓名";
+	public static final String READERGRADE = "读者年级";
 }

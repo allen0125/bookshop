@@ -21,10 +21,16 @@ public class ReaderOp {
 	public static List<Reader> getReaderByUID(int UID) {
 		return ReaderDb.getReaderByUID(UID);
 	}
-	public static void insertReader(Reader reader){
+
+	public static void insertReader(Reader reader) {
 		ReaderDb.insertReader(reader);
 	}
-	public static void updateReader(Reader reader){
+
+	public static void insertReaders(List<Reader> readerList) throws Exception {
+		ReaderDb.insertReaderList(readerList);
+	}
+
+	public static void updateReader(Reader reader) {
 		ReaderDb.updateReader(reader);
 	}
 }

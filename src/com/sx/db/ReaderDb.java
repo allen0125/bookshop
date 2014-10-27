@@ -11,7 +11,8 @@ import com.sx.entity.Reader;
 
 public class ReaderDb {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BookDb.class);
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ReaderDb.class);
 
 	public static List<Reader> getReaderList() {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
@@ -61,7 +62,7 @@ public class ReaderDb {
 		return list;
 	}
 
-	// 向面板中添加图书列表。
+	// 向面板中添加读者列表。
 
 	public static void insertReaderList(List<Reader> readerlist)
 			throws Exception {
@@ -78,11 +79,11 @@ public class ReaderDb {
 		}
 	}
 
-	
 	public static void updateReader(Reader reader) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {
-			ReaderTableMapper mapper = session.getMapper(ReaderTableMapper.class);
+			ReaderTableMapper mapper = session
+					.getMapper(ReaderTableMapper.class);
 			mapper.updateReader(reader);
 			session.commit();
 		} catch (Exception e) {
@@ -91,11 +92,9 @@ public class ReaderDb {
 			session.close();
 		}
 	}
-	
-	
-//	添加单个读者
-	
-	
+
+	// 添加单个读者
+
 	public static void insertReader(Reader reader) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {
@@ -135,7 +134,8 @@ public class ReaderDb {
 			session.close();
 		}
 	}
-	//test
+
+	// test
 	public static void incReaderLimit(int UID, int returnBooksCount) {
 		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
 		try {

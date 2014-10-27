@@ -15,6 +15,10 @@
 		select * from bookbrowse join booktable where UID=#{UID} and booktable.BID=bookbrowse.BID;
 	</select>
 	
+	<select id="getBookBrowser" resultType="com.sx.entity.BookBrowser">
+		select * from bookbrowse where UID = #{UID}
+	</select>
+	
 	<delete id="deleteRecord">
 		delete from bookbrowse where BID = #{BID}
 	</delete>
