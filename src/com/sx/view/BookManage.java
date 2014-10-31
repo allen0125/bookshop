@@ -88,7 +88,7 @@ public class BookManage extends ManageParent {
 				int selectedRow = tableShow.getSelectedRow();// 获得选中行的索引
 				if (selectedRow != -1) // 存在选中行
 				{
-					del_isbn = (long) defaultModel.getValueAt(selectedRow, 8);
+					del_isbn = (long) defaultModel.getValueAt(selectedRow, 9);
 					BookOp.delBook(del_isbn);
 					defaultModel.removeRow(selectedRow); // 删除行 删除数据库未写
 				}
