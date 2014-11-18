@@ -1,5 +1,6 @@
 package com.sx.view;
 
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -25,6 +26,8 @@ import com.sx.entity.BookReader;
 import com.sx.entity.Reader;
 import com.sx.fun.ReaderOp;
 import com.sx.view.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class ReaderManage extends JPanel {
 	private JTextField textField;
@@ -54,6 +57,12 @@ public class ReaderManage extends JPanel {
 		panel.add(comboBox);
 
 		textField = new JTextField();
+		textField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				textField.requestFocusInWindow();
+			}
+		});
 		panel.add(textField);
 		textField.setColumns(20);
 

@@ -53,9 +53,14 @@ public class Reader {
 	public String toString() {
 		String retString = "UID=" + UID+ "\tName=" + Name
 				+ "\tSex=" + Sex + "\tUserGrade=" + UserGrade + "HistoryCount="
-				+ HistoryCount + "LimitCount=" + LimitCount + "HistoryBook" + HistoryBook;
+				+ HistoryCount + "LimitCount=" + LimitCount；
 		return retString;
 	}
-	
+	public String toCString() {
+		String retString = "  读者号：" + UID+ "  读者姓名：" + Name
+				+ "  读者性别：" + Sex + "  读者年级：" + UserGrade + "  历史借书数量："
+				+ HistoryCount + "  限制数量：" + LimitCount;
+		return retString;
+	}
 	
 }

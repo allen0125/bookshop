@@ -1,6 +1,7 @@
 package com.sx.view;
 
 import java.awt.Dimension;
+import com.sx.view.browseManage;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -127,17 +128,6 @@ public class MainFrame extends JFrame {
 		});
 		menuBar.add(btnBookManage);
 
-		/*
-		 * 借书管理
-		 */
-		JButton buttonBorrowBook = new JButton("\u501F\u4E66\u7BA1\u7406");
-		buttonBorrowBook.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setContentPane(bookBrowseManage);
-				validate();
-			}
-		});
-
 		JButton button = new JButton("\u8BFB\u8005\u7BA1\u7406");// 读者管理
 		menuBar.add(button);
 		button.addActionListener(new ActionListener() {
@@ -146,16 +136,15 @@ public class MainFrame extends JFrame {
 				validate();
 			}
 		});
-		menuBar.add(buttonBorrowBook);
-
-		JButton button_1 = new JButton("\u8FD8\u4E66\u7BA1\u7406");
-		button_1.addActionListener(new ActionListener() {
+		
+		JButton button_2 = new JButton("\u501F\u9605\u7BA1\u7406");//借阅管理
+		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ReaderLogin readerLogin = new ReaderLogin();
-				readerLogin.setVisible(true);
+				browseManage bm = new browseManage();
+				bm.setVisible(true);
 			}
 		});
-		menuBar.add(button_1);
+		menuBar.add(button_2);
 		setVisible(true);
 	}
 }
