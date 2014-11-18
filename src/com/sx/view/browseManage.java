@@ -36,8 +36,7 @@ public class browseManage extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private int user_id;
-	private JTable tableShow;
+	private JTable tableShow_Down;
 	private JTable tableShow_Up;
 	List<Reader> readerlist;
 	JScrollPane scrollPane;
@@ -45,7 +44,9 @@ public class browseManage extends JFrame {
 	List<Book> bookList;
 	List<Book> books = null;
 	List<Book> borrowedBooks;
-	DefaultTableModel defaultModel;
+	DefaultTableModel defaultModel = new DefaultTableModel();
+	DefaultTableModel defaultModel_Up = new DefaultTableModel();
+	DefaultTableModel defaultModel_Down = new DefaultTableModel();
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ReaderLogin.class);
 	private JScrollPane scrollPane_Up;
@@ -72,7 +73,7 @@ public class browseManage extends JFrame {
 	 */
 	private List<Book> setSelectedBooks() {
 		List<Book> borrowedBookList = new ArrayList<Book>();
-		int[] selectedRows = tableShow.getSelectedRows();
+		int[] selectedRows = tableShow_Down.getSelectedRows();
 		// select nothing
 		if (0 == selectedRows.length) {
 			return borrowedBookList;
@@ -139,13 +140,14 @@ public class browseManage extends JFrame {
 					if (textField_1.getText().equals("")) {
 						bookList = BookOp.getBooks();
 						// scrollPane.setViewportView(refreshTable(bookList));
-						refreshTable(bookList, tableShow);
+						refreshTable(bookList, tableShow_Down,
+								defaultModel_Down);
 						return;
 					}
 					long isbn = 0;
 					isbn = Long.parseLong(textField_1.getText());
 					bookList = BookOp.getBookByISBN(isbn);
-					refreshTable(bookList, tableShow);
+					refreshTable(bookList, tableShow_Down, defaultModel_Down);
 				}
 
 			}
@@ -256,15 +258,15 @@ public class browseManage extends JFrame {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 261, 923, 288);
-		tableShow = new JTable();
-		initShowTable(bookList, tableShow);
-		scrollPane.setViewportView(tableShow);
+		tableShow_Down = new JTable();
+		initShowTable(bookList, tableShow_Down, defaultModel_Down);
+		scrollPane.setViewportView(tableShow_Down);
 		getContentPane().add(scrollPane);
 
 		scrollPane_Up = new JScrollPane();
 		scrollPane_Up.setBounds(0, 92, 923, 102);
 		tableShow_Up = new JTable();
-		initShowTable(books, tableShow_Up);
+		initShowTable(books, tableShow_Up, defaultModel_Up);
 		scrollPane_Up.setViewportView(tableShow_Up);
 		getContentPane().add(scrollPane_Up);
 
@@ -397,41 +399,39 @@ public class browseManage extends JFrame {
 	 */
 	// ------------------------------------------------------
 
-	private void initShowTable(List<Book> bookList, JTable table) {
+	private void initShowTable(List<Book> bookList, JTable table,
+			DefaultTableModel tableModel) {
 		Object[][] data = new Object[][] {};
 		String[] name = new String[] { "ID", "图书编号", "书名", "作者", "出版社", "出版日期",
 				"单价", "数量", "总价", "ISBN", "图书分类", "图书语言", "开本", "装帧", "特征" };
-		defaultModel = new DefaultTableModel(data, name);
+		tableModel.setDataVector(data, name);
 		if (bookList != null) {
-			getBookDetail(bookList);
+			getBookDetail(bookList, tableModel);
 		}
-		table.setModel(defaultModel);
+		table.setModel(tableModel);
 
 	}
 
 	/*
 	 * 更新
 	 */
-	protected JTable refreshTable(List<Book> bookList, JTable table) {
+	protected JTable refreshTable(List<Book> bookList, JTable table,
+			DefaultTableModel tableModel) {
 		// if (table == null) {
 		// table = new JTable();
 		// }
 
-		System.out.println("=====!!!==========" + (tableShow == tableShow_Up));
-		System.out.println("======!!!========="
-				+ (tableShow.equals(tableShow_Up)));
-
 		table.removeAll();
-		getBookDetail(bookList);
-		table.setModel(defaultModel);
+		getBookDetail(bookList, tableModel);
+		table.setModel(tableModel);
 		table.validate();
 		return table;
 	}
 
 	// 获取书籍详细信息，存入向量用以向JTable中添加
-	private void getBookDetail(List<Book> bookList) {
-		if (defaultModel.getRowCount() != 0) {
-			defaultModel.setRowCount(0);
+	private void getBookDetail(List<Book> bookList, DefaultTableModel tableModel) {
+		if (tableModel.getRowCount() != 0) {
+			tableModel.setRowCount(0);
 		}
 		// List<Book> bookList = BookOp.getBooks();
 		Book book = null;
@@ -453,7 +453,7 @@ public class browseManage extends JFrame {
 			data.add(book.getSize());
 			data.add(book.getBinding());
 			data.add(book.getFeature());
-			defaultModel.addRow(data);
+			tableModel.addRow(data);
 		}
 
 	}
