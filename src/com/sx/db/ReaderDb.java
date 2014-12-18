@@ -147,4 +147,15 @@ public class ReaderDb {
 			session.close();
 		}
 	}
+	public static void incReaderHis(int UID) {
+		SqlSession session = DBTool.SQL_SESSION_FACTORY.openSession();
+		try {
+			ReaderTableMapper mapper = session
+					.getMapper(ReaderTableMapper.class);
+			mapper.incReaderHis(UID);
+			session.commit();
+		} finally {
+			session.close();
+		}
+	}
 }

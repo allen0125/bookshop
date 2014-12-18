@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +39,6 @@ public class browseManage extends JFrame {
 	private JTextField textField_1;
 	private int user_id;
 	private JTable tableShow;
-	private JTable tableShow_Up;
 	List<Reader> readerlist;
 	JScrollPane scrollPane;
 	JScrollPane scrollPane2;
@@ -48,7 +48,6 @@ public class browseManage extends JFrame {
 	DefaultTableModel defaultModel;
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ReaderLogin.class);
-	private JScrollPane scrollPane_Up;
 	private JButton button_3;
 
 	/**
@@ -108,18 +107,24 @@ public class browseManage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JLabel label_userInfo = new JLabel("");
+		final JLabel label_userInfo = new JLabel("");
 		label_userInfo.setBounds(0, 54, 923, 26);
 		contentPane.add(label_userInfo);
 
+		final JLabel label_bookInfo = new JLabel("");
+		label_bookInfo.setBounds(0, 90, 923, 26);
+		contentPane.add(label_bookInfo);
 		textField = new JTextField();
+		
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int uid;
 				uid = Integer.valueOf(textField.getText());
 				List<Reader> userInfo = ReaderOp.getReaderByUID(uid);
 				label_userInfo.setText(userInfo.get(0).toCString());
+				List<Book> bookInfo = BookBrowseOp.getReaderBook(uid);
+				label_bookInfo.setText(" ");
+				label_bookInfo.setText(bookInfo.get(0).toCString());
 			}
 		});
 		textField.setBounds(362, 12, 158, 32);
@@ -150,12 +155,12 @@ public class browseManage extends JFrame {
 
 			}
 		});
-		textField_1.setBounds(362, 203, 158, 32);
+		textField_1.setBounds(362, 139, 158, 32);
 		textField_1.setColumns(10);
 		contentPane.add(textField_1);
 
 		JLabel label_1 = new JLabel("\u56FE\u4E66\u7F16\u53F7:");
-		label_1.setBounds(212, 206, 80, 25);
+		label_1.setBounds(212, 142, 80, 25);
 		label_1.setFont(new Font("Dialog", Font.BOLD, 15));
 		contentPane.add(label_1);
 
@@ -211,6 +216,7 @@ public class browseManage extends JFrame {
 							JOptionPane.ERROR_MESSAGE);
 					LOGGER.error(e.getMessage());
 					LOGGER.error(e.getStackTrace().toString());
+					BookBrowseOp.decReaderLimit(UID, 1);
 					return;
 				}
 
@@ -249,24 +255,24 @@ public class browseManage extends JFrame {
 				JOptionPane.showMessageDialog(null, "还书成功", "恭喜",
 						JOptionPane.INFORMATION_MESSAGE);
 
+				int uid;
+				uid = Integer.valueOf(textField.getText());
+				List<Reader> userInfo = ReaderOp.getReaderByUID(uid);
+				label_userInfo.setText(userInfo.get(0).toCString());
+				List<Book> bookInfo = BookBrowseOp.getReaderBook(uid);
+				label_bookInfo.setText(" ");
+				label_bookInfo.setText(bookInfo.get(0).toCString());
 			}
 		});
 		button_2.setBounds(566, 14, 107, 27);
 		contentPane.add(button_2);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 261, 923, 288);
+		scrollPane.setBounds(0, 181, 923, 391);
 		tableShow = new JTable();
 		initShowTable(bookList, tableShow);
 		scrollPane.setViewportView(tableShow);
 		getContentPane().add(scrollPane);
-
-		scrollPane_Up = new JScrollPane();
-		scrollPane_Up.setBounds(0, 92, 923, 102);
-		tableShow_Up = new JTable();
-		initShowTable(books, tableShow_Up);
-		scrollPane_Up.setViewportView(tableShow_Up);
-		getContentPane().add(scrollPane_Up);
 
 		button_3 = new JButton("\u501F\u51FA");// 借出
 		button_3.addActionListener(new ActionListener() {
@@ -316,6 +322,7 @@ public class browseManage extends JFrame {
 				// TODO: need judge if mysql update success???
 				try {
 					BookBrowseOp.insertBookBrowsers(bookBrowsers);
+					BookBrowseOp.incReaderHis(UID);
 				} catch (Exception e) {
 					LOGGER.error("BorrowBook: 1 insert into bookbrowse error!"
 							+ bookBrowsers);
@@ -362,40 +369,22 @@ public class browseManage extends JFrame {
 				}
 				JOptionPane.showMessageDialog(null, "借书成功", "恭喜",
 						JOptionPane.INFORMATION_MESSAGE);
+
+				int uid;
+				uid = Integer.valueOf(textField.getText());
+				List<Reader> userInfo = ReaderOp.getReaderByUID(uid);
+				label_userInfo.setText(userInfo.get(0).toCString());
+				List<Book> bookInfo = BookBrowseOp.getReaderBook(uid);
+				label_bookInfo.setText(" ");
+				label_bookInfo.setText(bookInfo.get(0).toCString());
 			}
 		});
-		button_3.setBounds(566, 205, 107, 27);
+		button_3.setBounds(566, 141, 107, 27);
 		contentPane.add(button_3);
+		
+		
 
 	}
-
-	/*
-	 * private JTable initShowTableReaderbook(List<Book> books) { if
-	 * (tableShow_Up != null) { return tableShow_Up; } tableShow_Up = new
-	 * JTable(); Object[][] data = new Object[][] {}; String[] name = new
-	 * String[] { "ID", "图书编号", "书名", "作者", "出版社", "出版日期", "单价", "数量", "总价",
-	 * "ISBN", "图书分类", "图书语言", "开本", "装帧", "特征" }; defaultModel = new
-	 * DefaultTableModel(data, name); if (books != null) {
-	 * getBookDetail1(books); } tableShow_Up.setModel(defaultModel);
-	 * 
-	 * return tableShow_Up; }
-	 * 
-	 * private void getBookDetail1(List<Book> books) { if
-	 * (defaultModel.getRowCount() != 0) { defaultModel.setRowCount(0); } //
-	 * List<Book> bookList = BookOp.getBooks(); Book book = null; for (int i =
-	 * 0; i < books.size(); i++) { Vector<Object> data = new Vector<>(); book =
-	 * books.get(i); data.add(i + 1); data.add(book.getBID());
-	 * data.add(book.getBookName()); data.add(book.getAuthor());
-	 * data.add(book.getPress()); data.add(book.getPressDate());
-	 * data.add(book.getPrice()); data.add(book.getCount());
-	 * data.add(book.getTotalPrice()); data.add(book.getISBN());
-	 * data.add(book.getBookCategory()); data.add(book.getLanguage());
-	 * data.add(book.getSize()); data.add(book.getBinding());
-	 * data.add(book.getFeature()); defaultModel.addRow(data); }
-	 * 
-	 * }
-	 */
-	// ------------------------------------------------------
 
 	private void initShowTable(List<Book> bookList, JTable table) {
 		Object[][] data = new Object[][] {};
@@ -417,9 +406,7 @@ public class browseManage extends JFrame {
 		// table = new JTable();
 		// }
 
-		System.out.println("=====!!!==========" + (tableShow == tableShow_Up));
-		System.out.println("======!!!========="
-				+ (tableShow.equals(tableShow_Up)));
+
 
 		table.removeAll();
 		getBookDetail(bookList);

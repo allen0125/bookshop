@@ -53,7 +53,7 @@ public class Reader {
 	public String toString() {
 		String retString = "UID=" + UID+ "\tName=" + Name
 				+ "\tSex=" + Sex + "\tUserGrade=" + UserGrade + "HistoryCount="
-				+ HistoryCount + "LimitCount=" + LimitCount£»
+				+ HistoryCount + "LimitCount=" + LimitCount;
 		return retString;
 	}
 	public String toCString() {

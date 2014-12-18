@@ -144,4 +144,10 @@ public class Book {
 				+ feature;
 		return retString;
 	}
+	public String toCString() {
+		String retString = "		图书编号：" + BID + "	书名：" + bookName
+				+ "	作者：" + author + "		出版社：" + press + "		出版日期："
+				+ pressDate;
+		return retString;
+	}
 }

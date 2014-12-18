@@ -32,4 +32,6 @@ public interface ReaderTableMapper {
 			@Param(value = "UID") int UID);
 
 	void updateReader(Reader reader);
+
+	void incReaderHis(int uID);
 }

@@ -62,6 +62,10 @@ public class BookBrowseOp {
 	public static void incReaderLimit(int UID, int borrowBooksCount) {
 		ReaderDb.incReaderLimit(UID, borrowBooksCount);
 	}
+	
+	public static void incReaderHis(int UID){
+		ReaderDb.incReaderHis(UID);
+	}
 
 	/*
 	 * get bookbrowser ªÒ»°∂¡’ﬂΩË‘ƒ

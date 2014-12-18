@@ -31,7 +31,7 @@ public class BookInfoDialog extends JDialog {
 		init(borrowedBooks);
 	}
 
-	private void init(List<Book> borrowedBooks) {
+	private void init(final List<Book> borrowedBooks) {
 		setTitle("\u501F\u9605\u4E66\u7C4D\u4FE1\u606F");
 		Dimension dim = getToolkit().getScreenSize();
 		setBounds((int) ((dim.getWidth() - 1000) / 2), 100, 1000, 300);
