@@ -386,34 +386,6 @@ public class browseManage extends JFrame {
 
 	}
 
-	/*
-	 * private JTable initShowTableReaderbook(List<Book> books) { if
-	 * (tableShow_Up != null) { return tableShow_Up; } tableShow_Up = new
-	 * JTable(); Object[][] data = new Object[][] {}; String[] name = new
-	 * String[] { "ID", "图书编号", "书名", "作者", "出版社", "出版日期", "单价", "数量", "总价",
-	 * "ISBN", "图书分类", "图书语言", "开本", "装帧", "特征" }; defaultModel = new
-	 * DefaultTableModel(data, name); if (books != null) {
-	 * getBookDetail1(books); } tableShow_Up.setModel(defaultModel);
-	 * 
-	 * return tableShow_Up; }
-	 * 
-	 * private void getBookDetail1(List<Book> books) { if
-	 * (defaultModel.getRowCount() != 0) { defaultModel.setRowCount(0); } //
-	 * List<Book> bookList = BookOp.getBooks(); Book book = null; for (int i =
-	 * 0; i < books.size(); i++) { Vector<Object> data = new Vector<>(); book =
-	 * books.get(i); data.add(i + 1); data.add(book.getBID());
-	 * data.add(book.getBookName()); data.add(book.getAuthor());
-	 * data.add(book.getPress()); data.add(book.getPressDate());
-	 * data.add(book.getPrice()); data.add(book.getCount());
-	 * data.add(book.getTotalPrice()); data.add(book.getISBN());
-	 * data.add(book.getBookCategory()); data.add(book.getLanguage());
-	 * data.add(book.getSize()); data.add(book.getBinding());
-	 * data.add(book.getFeature()); defaultModel.addRow(data); }
-	 * 
-	 * }
-	 */
-	// ------------------------------------------------------
-
 	private void initShowTable(List<Book> bookList, JTable table) {
 		Object[][] data = new Object[][] {};
 		String[] name = new String[] { "ID", "图书编号", "书名", "作者", "出版社", "出版日期",
