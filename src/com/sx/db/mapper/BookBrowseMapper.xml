@@ -20,6 +20,6 @@
 	</select>
 	
 	<delete id="deleteRecord">
-		delete from bookbrowse where BID = #{BID}
+		delete from bookbrowse where UID = #{UID}
 	</delete>
 </mapper>
