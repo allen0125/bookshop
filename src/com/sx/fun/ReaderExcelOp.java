@@ -112,6 +112,12 @@ public class ReaderExcelOp {
 				map.put(DbTitle.READERNAME, cell.getColumnIndex());
 			} else if (cell.toString().equals(ExcelTitle.READERGRADE)) {
 				map.put(DbTitle.READERGRADE, cell.getColumnIndex());
+			} else if (cell.toString().equals(ExcelTitle.READERSEX)) {
+				map.put(DbTitle.READERSEX, cell.getColumnIndex());
+			} else if (cell.toString().equals(ExcelTitle.HISTORYCOUNT)) {
+				map.put(DbTitle.HISTORYCOUNT, cell.getColumnIndex());
+			} else if (cell.toString().equals(ExcelTitle.LIMITCOUNT)) {
+				map.put(DbTitle.LIMITCOUNT, cell.getColumnIndex());
 			}
 		}
 		return map;
@@ -146,11 +152,20 @@ public class ReaderExcelOp {
 
 			cell = row.getCell(map.get(DbTitle.READERNAME));
 			reader.setName(cell.toString().trim());
+			
+			cell = row.getCell(map.get(DbTitle.READERSEX));
+			reader.setSex(cell.toString().trim());
 
 			cell = row.getCell(map.get(DbTitle.READERGRADE));
 			reader.setUserGrade(cell.toString().trim());
-
-			reader.setLimitCount(1);
+			
+			cell = row.getCell(map.get(DbTitle.HISTORYCOUNT));
+			int a = Integer.parseInt(cell.toString().trim());
+			reader.setHistoryCount(a);
+			
+			cell = row.getCell(map.get(DbTitle.LIMITCOUNT));
+			int b = Integer.parseInt(cell.toString().trim());
+			reader.setLimitCount(b);
 
 			readerList.add(reader);
 		}

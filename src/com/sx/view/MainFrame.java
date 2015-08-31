@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.sx.fun.BookBrowseExcelOp;
 import com.sx.fun.ExcelOp;
 import com.sx.fun.ReaderExcelOp;
 import com.sx.util.Constant;
@@ -104,6 +105,22 @@ public class MainFrame extends JFrame {
 			}
 		});
 		menu.add(mntmImportReaderExcel);
+		
+		JMenuItem menuItem_1 = new JMenuItem("\u5BFC\u5165\u501F\u4E66\u8BB0\u5F55");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				File file = FileUtil.openFile();
+				if (file != null) {
+					try {
+						BookBrowseExcelOp.importBookBrowseExcel(file);
+					} catch (Exception e1) {
+						System.err.println(e1.getMessage());
+					}
+				}
+			
+			}
+		});
+		menu.add(menuItem_1);
 		menu.add(mntmExportBookExcel);
 
 		/*
@@ -117,6 +134,30 @@ public class MainFrame extends JFrame {
 			}
 		});
 		menu.add(mntmexcel);
+		
+		JMenuItem menuItem = new JMenuItem("\u5BFC\u51FA\u501F\u4E66\u8BB0\u5F55");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fileName = FileUtil.genExcelFileName(Constant.BookBrowse);
+				ExcelOp.exportExcel(fileName, Constant.BookBrowse);
+			}
+		});
+		menu.add(menuItem);
+		
+		JMenuItem menuItem_2 = new JMenuItem("\u4E00\u952E\u5907\u4EFD");//Ò»¼ü±¸·Ý
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fileNameBT = FileUtil.genExcelFileName(Constant.BookTable);
+				ExcelOp.exportExcel(fileNameBT, Constant.BookTable);
+				
+				String fileNameUT = FileUtil.genExcelFileName(Constant.UserTable);
+				ExcelOp.exportExcel(fileNameUT, Constant.UserTable);
+				
+				String fileNameBB = FileUtil.genExcelFileName(Constant.BookBrowse);
+				ExcelOp.exportExcel(fileNameBB, Constant.BookBrowse);
+			}
+		});
+		menu.add(menuItem_2);
 
 		JButton btnBookManage = new JButton("\u4E66\u7C4D\u7BA1\u7406");
 		btnBookManage.addActionListener(new ActionListener() {

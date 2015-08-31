@@ -1,9 +1,5 @@
 package com.sx.entity;
 
-import java.util.List;
-
-import com.sx.fun.BookBrowseOp;
-
 public class Reader {
 	
 	private int UID;
@@ -12,7 +8,6 @@ public class Reader {
 	private String UserGrade;
 	private int HistoryCount;
 	private int LimitCount;
-	private String HistoryBook;
 	
 	public int getUID() {
 		return UID;

@@ -4,6 +4,7 @@ public class Constant {
 	public static final String ExcelSuffix = ".xls";
 	public static final String BookTable = "booktable";
 	public static final String UserTable = "usertable";
+	public static final String BookBrowse = "bookbrowse";
 	public static final String ISBN = "ISBN";
 	public static final String BookName = "书名";
 	public static final String Author = "作者";

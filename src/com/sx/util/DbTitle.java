@@ -18,4 +18,14 @@ public final class DbTitle {
 	public static final String READERID = "UID";
 	public static final String READERNAME = "Name";
 	public static final String READERGRADE = "UserGrade";
+	public static final String READERSEX = "Sex";
+	public static final String HISTORYCOUNT = "HistoryCount";
+	public static final String LIMITCOUNT = "LimitCount";
+	
+	
+	public static final String BB_BOOKID = "BID";
+	public static final String BB_READERID = "UID";
+	public static final String BB_BORROWDATE = "borrowDate";
+	public static final String BB_RETRUNDATE = "returnDate";
+	public static final String BB_COMMENT = "comment";
 }

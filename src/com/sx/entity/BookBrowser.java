@@ -9,6 +9,12 @@ import java.util.Date;
  *
  */
 public class BookBrowser {
+	@Override
+	public String toString() {
+		return "BookBrowser [BID=" + BID + ", UID=" + UID + ", borrowDate=" + borrowDate + ", returnDate=" + returnDate
+				+ ", comment=" + comment + "]";
+	}
+
 	private int BID;
 	private int UID;
 	private Date borrowDate;

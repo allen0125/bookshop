@@ -165,7 +165,7 @@ public class browseManage extends JFrame {
 		contentPane.add(label_1);
 
 		JButton button_2 = new JButton("\u8FD8\u4E66");
-		button_2.addActionListener(new ActionListener() {
+		button_2.addActionListener(new ActionListener() {                      //ªπ È∞¥≈•
 			public void actionPerformed(ActionEvent arg0) {
 
 				int UID = 0;
